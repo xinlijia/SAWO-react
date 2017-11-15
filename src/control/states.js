@@ -4,7 +4,6 @@ import actions from '../actions';
 
 
 const states = {
-
   start: () => {
     // const state = store.getState();
     states.dispatchSave(0);
@@ -13,6 +12,7 @@ const states = {
 
   auto: () => {
      // const state = store.getState();
+
   },
 
   left: () => {
@@ -22,6 +22,10 @@ const states = {
   right: () => {
     const addSave = store.getState().get('save') - 10;
     states.dispatchSave(addSave);
+  },
+
+  update: (saves) => {
+    store.dispatch(actions.saves(saves));
   },
 
   dispatchSave: (save) => {

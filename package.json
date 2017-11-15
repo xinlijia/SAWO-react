@@ -1,7 +1,7 @@
 {
   "name": "react-tetris",
   "version": "1.0.0",
-  "description": "使用React、Redux、Immutable编写「俄罗斯方块」。Use Tetact, Redux, Immutable to coding \"Tetris\".",
+  "description": "SAWO-react",
   "scripts": {
     "start": "webpack-dev-server --progress",
     "build": "rm -rf ./build/* && webpack --config ./webpack.production.config.js --progress && ls ./build"
@@ -11,18 +11,17 @@
     "url": "git+https://github.com/chvin/react-tetris.git"
   },
   "keywords": [
-    "Tetris",
     "React",
     "Redux",
     "Immutable",
-    "俄罗斯方块"
+    "SAWO"
   ],
-  "author": "Chvin",
-  "license": "Apache-2.0",
+  "author": "Xinli",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chvin/react-tetris/issues"
+    "url": "https://github.com/xinlijia/SAWO-react/issues"
   },
-  "homepage": "https://github.com/chvin/react-tetris#readme",
+  "homepage": "https://github.com/xinlijia/SAWO-react",
   "devDependencies": {
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.13.2",

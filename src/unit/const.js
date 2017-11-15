@@ -1,4 +1,4 @@
-// import { List } from 'immutable';
+import { List } from 'immutable';
 
 const StorageKey = 'SAWO_REACT';
 
@@ -22,6 +22,15 @@ const lastRecord = (() => { // 上一把的状态
   return data;
 })();
 
+const transform = (function () {
+  const trans = ['transform', 'webkitTransform', 'msTransform', 'mozTransform', 'oTransform'];
+  const body = document.body;
+  return trans.filter((e) => body.style[e] !== undefined)[0];
+}());
+
+const blankSave = List([0, 0]);
+
+
 // const getParam = (param) => { // 获取浏览器参数 for language
 //   const r = new RegExp(`\\?(?:.+&)?${param}=(.*?)(?:&.*)?$`);
 //   const m = window.location.toString().match(r);
@@ -31,4 +40,6 @@ const lastRecord = (() => { // 上一把的状态
 module.exports = {
   StorageKey,
   lastRecord,
+  blankSave,
+  transform,
 };

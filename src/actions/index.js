@@ -9,7 +9,15 @@ function save(data) {
   };
 }
 
+function saves(data) {
+  return {
+    type: reducerType.SAVES,
+    data,
+  };
+}
+
 export default {
+  saves,
   save,
   keyboard,
 };

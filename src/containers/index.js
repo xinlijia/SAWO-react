@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 // import classnames from 'classnames';
 import propTypes from 'prop-types';
 import Point from '../components/point';
+import Test from '../components/test';
+import Keyboard from '../components/keyboard';
+import { transform } from '../unit/const';
+
+import style from './index.less';
 
 import states from '../control/states';
 
@@ -38,8 +43,8 @@ class App extends React.Component {
   //   } else {
   //     states.overStart();
   //   }
-    states.left();
-    states.left();
+  //  states.left();
+    states.auto();
   }
   resize() {
     this.setState({
@@ -48,19 +53,53 @@ class App extends React.Component {
     });
   }
   render() {
+    let filling = 0;
+    const size = (() => {
+      const w = this.state.w;
+      const h = this.state.h;
+      const ratio = h / w;
+      let scale;
+      let css = {};
+      if (ratio < 1.5) {
+        scale = h / 960;
+      } else {
+        scale = w / 640;
+        filling = (h - (960 * scale)) / scale / 3;
+        css = {
+          paddingTop: Math.floor(filling) + 42,
+          paddingBottom: Math.floor(filling),
+          marginTop: Math.floor(-480 - (filling * 1.5)),
+        };
+      }
+      css[transform] = `scale(${scale})`;
+      return css;
+    })();
+
     return (
-      <div>
+      <div
+        className={style.app}
+        style={size}
+      >
         <Point save={this.props.save} />
+        <Test saves={this.props.saves} />
+        <Keyboard filling={filling} keyboard={this.props.keyboard} />
+
       </div>
     );
   }
 }
 App.propTypes = {
   save: propTypes.number.isRequired,
+  saves: propTypes.object.isRequired,
+  keyboard: propTypes.object.isRequired,
+
 };
 
 const mapStateToProps = (state) => ({
   save: state.get('save'),
+  saves: state.get('saves'),
+  keyboard: state.get('keyboard'),
+
 });
 
 export default connect(mapStateToProps)(App);
