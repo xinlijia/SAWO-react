@@ -11,10 +11,9 @@ const down = (store) => {
     interval: 100,
     callback: () => {
       const state = store.getState();
-      let saves = state.get('saves');
-      saves = saves.set(0, 3);
-      saves = saves.set(1, -3);
-      states.update(saves);
+      let pos = state.get('pos');
+      pos = pos.set(1, pos.get(1) - 10);
+      states.updatePos(pos);
       states.left();
     },
   });

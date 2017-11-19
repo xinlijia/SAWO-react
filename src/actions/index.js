@@ -16,8 +16,17 @@ function saves(data) {
   };
 }
 
+function pos(data) {
+  return {
+    type: reducerType.POS,
+    data,
+  };
+}
+
+
 export default {
   saves,
   save,
   keyboard,
+  pos,
 };

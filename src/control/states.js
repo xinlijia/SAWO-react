@@ -17,15 +17,20 @@ const states = {
 
   left: () => {
     const addSave = store.getState().get('save') + 10;
+    console.log('left');
     states.dispatchSave(addSave);
   },
   right: () => {
     const addSave = store.getState().get('save') - 10;
+    console.log('right');
     states.dispatchSave(addSave);
   },
 
   update: (saves) => {
     store.dispatch(actions.saves(saves));
+  },
+  updatePos: (pos) => {
+    store.dispatch(actions.pos(pos));
   },
 
   dispatchSave: (save) => {

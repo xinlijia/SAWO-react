@@ -28,18 +28,14 @@ const transform = (function () {
   return trans.filter((e) => body.style[e] !== undefined)[0];
 }());
 
+const initCharacter = List([0, 0]);
+
 const blankSave = List([0, 0]);
-
-
-// const getParam = (param) => { // 获取浏览器参数 for language
-//   const r = new RegExp(`\\?(?:.+&)?${param}=(.*?)(?:&.*)?$`);
-//   const m = window.location.toString().match(r);
-//   return m ? decodeURI(m[1]) : '';
-// };
 
 module.exports = {
   StorageKey,
   lastRecord,
   blankSave,
   transform,
+  initCharacter,
 };
