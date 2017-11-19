@@ -3,9 +3,9 @@ import todo from './todo';
 
 const keyboard = {
   37: 'left',
-  // 38: 'rotate',
+  38: 'up',
   39: 'right',
-  // 40: 'down',
+  40: 'down',
   // 32: 'space',
   // 83: 's',
   // 82: 'r',

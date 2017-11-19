@@ -5,37 +5,33 @@ import actions from '../actions';
 
 const states = {
   start: () => {
-    // const state = store.getState();
-    states.dispatchSave(0);
-    states.auto();
+    states.scene();
+  },
+  scene: () => {
+    states.characterUpdate();
   },
 
-  auto: () => {
-     // const state = store.getState();
-
+  characterUpdate: () => {
+    const state = store.getState();
+    const keyboard = state.get('keyboard');
+    // const maze = state.get('maze');
+    let pos = state.get('characterPos');
+    if (keyboard.get('up')) {
+      pos = pos.set(0, pos.get(0) - 1);
+    }
+    if (keyboard.get('down')) {
+      pos = pos.set(0, pos.get(0) + 1);
+    }
+    if (keyboard.get('left')) {
+      pos = pos.set(1, pos.get(1) - 1);
+    }
+    if (keyboard.get('right')) {
+      pos = pos.set(1, pos.get(1) + 1);
+    }
+    store.dispatch(actions.characterPos(pos));
   },
 
-  left: () => {
-    const addSave = store.getState().get('save') + 10;
-    console.log('left');
-    states.dispatchSave(addSave);
-  },
-  right: () => {
-    const addSave = store.getState().get('save') - 10;
-    console.log('right');
-    states.dispatchSave(addSave);
-  },
 
-  update: (saves) => {
-    store.dispatch(actions.saves(saves));
-  },
-  updatePos: (pos) => {
-    store.dispatch(actions.pos(pos));
-  },
-
-  dispatchSave: (save) => {
-    store.dispatch(actions.save(save));
-  },
 };
 
 export default states;

@@ -1,10 +1,6 @@
 import React from 'react';
-// import cn from 'classnames';
 import propTypes from 'prop-types';
-// import style from './index.less';
-// import { UP, DOWN, LEFT, RIGHT } from '../../unit/reducerTypes'
-// import Sprite from '../sprite';
-
+import Sprite from '../sprite';
 
 export default class Character extends React.Component {
 
@@ -35,8 +31,7 @@ export default class Character extends React.Component {
   render() {
     return (
       <div>
-        {this.state.top}
-        {this.state.left}
+        <Sprite pos={this.props.pos} />
       </div>
     );
   }

@@ -15,7 +15,23 @@ function right(data) {
   };
 }
 
+function up(data) {
+  return {
+    type: reducerType.KEY_UP,
+    data,
+  };
+}
+
+function down(data) {
+  return {
+    type: reducerType.KEY_DOWN,
+    data,
+  };
+}
+
 export default {
   left,
   right,
+  up,
+  down,
 };

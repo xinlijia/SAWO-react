@@ -2,31 +2,15 @@ import * as reducerType from '../unit/reducerType';
 import keyboard from './keyboard';
 
 
-function save(data) {
+function characterPos(data) {
   return {
-    type: reducerType.SAVE,
-    data,
-  };
-}
-
-function saves(data) {
-  return {
-    type: reducerType.SAVES,
-    data,
-  };
-}
-
-function pos(data) {
-  return {
-    type: reducerType.POS,
+    type: reducerType.CHARACTERPOS,
     data,
   };
 }
 
 
 export default {
-  saves,
-  save,
   keyboard,
-  pos,
+  characterPos,
 };

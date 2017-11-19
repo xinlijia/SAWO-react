@@ -4,9 +4,9 @@ import states from '../states';
 
 
 const down = (store) => {
-  store.dispatch(actions.keyboard.right(true));
+  store.dispatch(actions.keyboard.up(true));
   event.down({
-    key: 'right',
+    key: 'up',
     begin: 200,
     interval: 5,
     callback: () => {
@@ -16,9 +16,9 @@ const down = (store) => {
 };
 
 const up = (store) => {
-  store.dispatch(actions.keyboard.right(false));
+  store.dispatch(actions.keyboard.up(false));
   event.up({
-    key: 'right',
+    key: 'up',
   });
 };
 

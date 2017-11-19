@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux-immutable';
-import save from './save';
-import saves from './saves';
-import pos from './pos';
+import characterPos from './characterPos';
 
 import keyboard from './keyboard';
+import scene from './scene';
+import mazeTools from './mazeTools';
 
 const rootReducer = combineReducers({
-  save,
-  saves,
-  pos,
+  characterPos,
   keyboard,
+  scene,
+  mazeTools,
 });
 
 export default rootReducer;

@@ -2,11 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import classnames from 'classnames';
 import propTypes from 'prop-types';
-import Point from '../components/point';
-import Test from '../components/test';
 import Character from '../components/character';
-
-import Sprite from '../components/sprite';
+import Maze from '../components/maze';
 
 // import Keyboard from '../components/keyboard';
 // import { transform } from '../unit/const';
@@ -24,35 +21,36 @@ class App extends React.Component {
     };
   }
   componentWillMount() {
-    //
+    states.start();
   }
   componentDidMount() {
-    states.auto();
+    states.start();
   }
 
   render() {
     return (
       <div>
-        <Point save={this.props.save} />
-        <Test saves={this.props.saves} />
-        <Character pos={this.props.pos} />
-        <Sprite pos={this.props.pos} />
+        <Character pos={this.props.characterPos} />
+        <Maze
+          tools={this.props.mazeTools}
+          pos={[100, 100]}
+        />
       </div>
     );
   }
 }
 App.propTypes = {
-  save: propTypes.number.isRequired,
-  saves: propTypes.object.isRequired,
   keyboard: propTypes.object.isRequired,
-  pos: propTypes.object.isRequired,
+  characterPos: propTypes.object.isRequired,
+  mazeTools: propTypes.object.isRequired,
+
 };
 
 const mapStateToProps = (state) => ({
-  save: state.get('save'),
-  saves: state.get('saves'),
   keyboard: state.get('keyboard'),
-  pos: state.get('pos'),
+  characterPos: state.get('characterPos'),
+  mazeTools: state.get('mazeTools'),
+
 });
 
 export default connect(mapStateToProps)(App);

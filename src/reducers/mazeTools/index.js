@@ -2,16 +2,16 @@ import { List } from 'immutable';
 import * as reducerType from '../../unit/reducerType';
 import { lastRecord } from '../../unit/const';
 
-const initState = lastRecord && Array.isArray(lastRecord.pos) ?
-List(lastRecord.pos) : [0, 0];
+const initState = lastRecord && Array.isArray(lastRecord.mazeTools) ?
+List(lastRecord.mazeTools) : [0, 0];
 
-const pos = (state = initState, action) => {
+const mazeTools = (state = initState, action) => {
   switch (action.type) {
-    case reducerType.POS:
+    case reducerType.MAZETOOLS:
       return action.data;
     default:
       return state;
   }
 };
 
-export default pos;
+export default mazeTools;

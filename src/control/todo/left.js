@@ -8,13 +8,9 @@ const down = (store) => {
   event.down({
     key: 'left',
     begin: 200,
-    interval: 100,
+    interval: 5,
     callback: () => {
-      const state = store.getState();
-      let pos = state.get('pos');
-      pos = pos.set(1, pos.get(1) - 10);
-      states.updatePos(pos);
-      states.left();
+      states.characterUpdate();
     },
   });
 };

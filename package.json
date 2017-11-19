@@ -1,5 +1,5 @@
 {
-  "name": "react-tetris",
+  "name": "SAWO-react",
   "version": "1.0.0",
   "description": "SAWO-react",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chvin/react-tetris.git"
+    "url": "git+https://github.com/xinlijia/SAWO-react.git"
   },
   "keywords": [
     "React",

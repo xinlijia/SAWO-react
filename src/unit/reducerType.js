@@ -1,9 +1,8 @@
-export const SAVE = 'SAVE';
-export const SAVES = 'SAVES';
-export const POS = 'POS';
-
+export const CHARACTERPOS = 'CHARACTERPOS';
+export const SCENE = 'SCENE';
+export const MAZETOOLS = 'MAZETOOLS';
 
 export const KEY_LEFT = 'KEY_LEFT';
 export const KEY_RIGHT = 'KEY_RIGHT';
-
-export const CHA_POS = 'CHA_POS';
+export const KEY_UP = 'KEY_UP';
+export const KEY_DOWN = 'KEY_DOWN';
