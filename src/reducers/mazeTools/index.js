@@ -1,6 +1,6 @@
 import { List } from 'immutable';
-import * as reducerType from '../../unit/reducerType';
-import { lastRecord } from '../../unit/const';
+import * as reducerType from '../../util/reducerType';
+import { lastRecord } from '../../util/const';
 
 const initState = lastRecord && Array.isArray(lastRecord.mazeTools) ?
 List(lastRecord.mazeTools) : [0, 0];

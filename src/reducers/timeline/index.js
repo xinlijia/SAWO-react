@@ -1,6 +1,6 @@
 import { List } from 'immutable';
-import * as reducerType from '../../unit/reducerType';
-import { lastRecord } from '../../unit/const';
+import * as reducerType from '../../util/reducerType';
+import { lastRecord } from '../../util/const';
 
 let initState = lastRecord && !isNaN(parseInt(lastRecord.timelinePos, 10)) ?
   parseInt(lastRecord.timelinePos, 10) : 0;

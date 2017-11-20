@@ -6,7 +6,7 @@ import Character from '../components/character';
 import Maze from '../components/maze';
 
 // import Keyboard from '../components/keyboard';
-// import { transform } from '../unit/const';
+// import { transform } from '../util/const';
 
 // import style from './index.less';
 

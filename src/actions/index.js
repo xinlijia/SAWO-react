@@ -1,4 +1,4 @@
-import * as reducerType from '../unit/reducerType';
+import * as reducerType from '../util/reducerType';
 import keyboard from './keyboard';
 
 

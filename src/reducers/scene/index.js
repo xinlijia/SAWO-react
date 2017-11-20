@@ -1,6 +1,6 @@
 import { List } from 'immutable';
-import * as reducerType from '../../unit/reducerType';
-import { lastRecord } from '../../unit/const';
+import * as reducerType from '../../util/reducerType';
+import { lastRecord } from '../../util/const';
 
 // 0: title, 1: stage choose, 2: game scene
 // 0-9 stage id

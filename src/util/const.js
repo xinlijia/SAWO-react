@@ -30,7 +30,6 @@ const transform = (function () {
 
 const initCharacter = List([0, 0]);
 
-
 module.exports = {
   StorageKey,
   lastRecord,

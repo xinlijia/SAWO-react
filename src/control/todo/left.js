@@ -1,16 +1,16 @@
-import event from '../../unit/event';
+import event from '../../util/event';
 import actions from '../../actions';
-import states from '../states';
+import mainScene from '../mainScene';
 
 
 const down = (store) => {
   store.dispatch(actions.keyboard.left(true));
   event.down({
     key: 'left',
-    begin: 200,
+    begin: 0,
     interval: 5,
     callback: () => {
-      states.characterUpdate();
+      mainScene.characterUpdate(store);
     },
   });
 };

@@ -1,6 +1,6 @@
 import { StorageKey } from './const';
 
-const unit = {
+const util = {
   subscribeRecord(store) { // 将状态记录到 localStorage
     store.subscribe(() => {
       let data = store.getState().toJS();
@@ -14,4 +14,4 @@ const unit = {
   },
 };
 
-module.exports = unit;
+module.exports = util;

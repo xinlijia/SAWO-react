@@ -9,12 +9,12 @@ export default class Maze extends React.Component {
     this.state = {
       tools: [],
       bricks: [
-              { top: 10, left: 10 },
-              { top: 10, left: 25 },
-              { top: 10, left: 40 },
-              { top: 10, left: 55 },
-              { top: 10, left: 70 },
-              { top: 10, left: 85 },
+              { top: 10, left: 10, width: 15, height: 15 },
+              { top: 10, left: 25, width: 15, height: 15 },
+              { top: 10, left: 40, width: 15, height: 15 },
+              { top: 10, left: 55, width: 15, height: 15 },
+              { top: 10, left: 70, width: 15, height: 15 },
+              { top: 10, left: 85, width: 15, height: 15 },
       ],
     };
   }
