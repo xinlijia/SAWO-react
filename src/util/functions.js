@@ -7,7 +7,7 @@ function collideRect(rect1, rect2) {
 
 function collideList(list, rect0) {
   let i;
-  for (i = 0; i < list.lenght; i++) {
+  for (i = 0; i < list.length; i++) {
     if (collideRect(list[i], rect0)) {
       return i;
     }

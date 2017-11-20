@@ -33,7 +33,7 @@ class App extends React.Component {
         <Character pos={this.props.characterPos} />
         <Maze
           tools={this.props.mazeTools}
-          pos={[100, 100]}
+          pos={[0, 0]}
         />
       </div>
     );

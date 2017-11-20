@@ -1,27 +1,68 @@
-import { collideRect } from '../util/functions';
+import { collideRect, collideList } from '../util/functions';
 import actions from '../actions';
 
 const mainScene = {
   characterUpdate: (store) => {
     const state = store.getState();
     const keyboard = state.get('keyboard');
-    // const maze = state.get('maze');
-    console.log(collideRect({ top: 10, left: 10, width: 15, height: 15 },
-      { top: 15, left: 20, width: 15, height: 15 }));
+    const bricks = [
+                  { top: 10, left: 10, width: 15, height: 15 },
+                  { top: 10, left: 25, width: 15, height: 15 },
+                  { top: 10, left: 40, width: 15, height: 15 },
+                  { top: 10, left: 55, width: 15, height: 15 },
+                  { top: 10, left: 70, width: 15, height: 15 },
+                  { top: 10, left: 85, width: 15, height: 15 },
+    ];
     let pos = state.get('characterPos');
+
     if (keyboard.get('up')) {
-      pos = pos.set(0, pos.get(0) - 1);
+      pos = mainScene.moveSingleAxis(0, -1, bricks, pos);
     }
     if (keyboard.get('down')) {
-      pos = pos.set(0, pos.get(0) + 1);
+      pos = mainScene.moveSingleAxis(0, 1, bricks, pos);
     }
     if (keyboard.get('left')) {
-      pos = pos.set(1, pos.get(1) - 1);
+      pos = mainScene.moveSingleAxis(-1, 0, bricks, pos);
     }
     if (keyboard.get('right')) {
-      pos = pos.set(1, pos.get(1) + 1);
+      pos = mainScene.moveSingleAxis(1, 0, bricks, pos);
     }
+    console.log(pos.get(0));
+    console.log(pos.get(1));
+
     store.dispatch(actions.characterPos(pos));
+  },
+
+  moveSingleAxis: (dx, dy, bricks, pos) => {
+    let i;
+    let b;
+    let res = pos;
+    res = res.set(0, res.get(0) + dy);
+    res = res.set(1, res.get(1) + dx);
+    const characterRect = { top: res.get(0), left: res.get(1), width: 8, height: 8 };
+
+    for (i = 0; i < bricks.length; i++) {
+      b = bricks[i];
+      if (collideRect(b, characterRect)) {
+        if (dx > 0) {
+          res = res.set(1, b.left - characterRect.width);
+        } else if (dx < 0) {
+          res = res.set(1, b.left + b.width);
+        }
+        if (dy > 0) {
+          res = res.set(0, b.top - characterRect.height);
+        } else if (dy < 0) {
+          res = res.set(0, b.top + b.height);
+        }
+      }
+    }
+    return res;
+  },
+  test: () => {
+    console.log(collideRect({ top: 10, left: 10, width: 15, height: 15 },
+      { top: 10, left: 10, width: 15, height: 15 }));
+    const bricks = [{ top: 10, left: 10, width: 15, height: 15 }];
+    console.log(collideList(bricks, { top: 10, left: 10, width: 15, height: 15 }));
   },
 };
 
