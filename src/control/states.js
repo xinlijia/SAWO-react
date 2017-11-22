@@ -17,6 +17,7 @@ const states = {
   },
   mainSceneUpdate: () => {
     mainScene.characterUpdate(store);
+    mainScene.iconUpdate(store);
   },
 
 };

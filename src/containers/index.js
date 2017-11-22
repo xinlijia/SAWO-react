@@ -1,10 +1,12 @@
 import React from 'react';
+import { List } from 'immutable';
+
 import { connect } from 'react-redux';
 // import classnames from 'classnames';
 import propTypes from 'prop-types';
 import Character from '../components/character';
+import Icon from '../components/icon';
 import Maze from '../components/maze';
-
 // import Keyboard from '../components/keyboard';
 // import { transform } from '../util/const';
 
@@ -31,6 +33,8 @@ class App extends React.Component {
     return (
       <div>
         <Character pos={this.props.characterPos} />
+        <Icon pos={List([10, 10])} />
+
         <Maze
           tools={this.props.mazeTools}
           pos={[0, 0]}

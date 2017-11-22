@@ -52,6 +52,10 @@ const mainScene = {
     }
     return res;
   },
+  iconUpdate: () => {
+    //
+  },
+
   test: () => {
     console.log(collideRect({ top: 10, left: 10, width: 15, height: 15 },
       { top: 10, left: 10, width: 15, height: 15 }));
