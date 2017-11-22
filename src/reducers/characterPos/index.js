@@ -3,7 +3,7 @@ import * as reducerType from '../../util/reducerType';
 import { lastRecord } from '../../util/const';
 
 const initState = lastRecord && Array.isArray(lastRecord.characterPos) ?
-List(lastRecord.characterPos) : [0, 0];
+List(lastRecord.characterPos) : List([0, 0]);
 
 const characterPos = (state = initState, action) => {
   switch (action.type) {

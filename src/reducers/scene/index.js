@@ -5,7 +5,7 @@ import { lastRecord } from '../../util/const';
 // 0: title, 1: stage choose, 2: game scene
 // 0-9 stage id
 const initState = lastRecord && Array.isArray(lastRecord.scene) ?
-List(lastRecord.scene) : [0, 0];
+List(lastRecord.scene) : List([0, 0]);
 
 const scene = (state = initState, action) => {
   switch (action.type) {

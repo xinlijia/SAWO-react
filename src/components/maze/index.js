@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import Brick from './brick';
+import mazeData from '../../resource/maze/maze.json';
 
 export default class Maze extends React.Component {
 
@@ -8,14 +9,7 @@ export default class Maze extends React.Component {
     super();
     this.state = {
       tools: [],
-      bricks: [
-              { top: 10, left: 10, width: 15, height: 15 },
-              { top: 10, left: 25, width: 15, height: 15 },
-              { top: 10, left: 40, width: 15, height: 15 },
-              { top: 10, left: 55, width: 15, height: 15 },
-              { top: 10, left: 70, width: 15, height: 15 },
-              { top: 10, left: 85, width: 15, height: 15 },
-      ],
+      bricks: mazeData.maze[1].brick,
     };
   }
 
@@ -50,6 +44,7 @@ export default class Maze extends React.Component {
 
 
 Maze.propTypes = {
+  mazeID: propTypes.number.isRequired,
   tools: propTypes.object.isRequired,
   pos: propTypes.array.isRequired,
 };

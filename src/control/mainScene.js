@@ -1,18 +1,12 @@
 import { collideRect, collideList } from '../util/functions';
 import actions from '../actions';
+import mazeData from '../resource/maze/maze.json';
 
 const mainScene = {
   characterUpdate: (store) => {
     const state = store.getState();
     const keyboard = state.get('keyboard');
-    const bricks = [
-                  { top: 10, left: 10, width: 15, height: 15 },
-                  { top: 10, left: 25, width: 15, height: 15 },
-                  { top: 10, left: 40, width: 15, height: 15 },
-                  { top: 10, left: 55, width: 15, height: 15 },
-                  { top: 10, left: 70, width: 15, height: 15 },
-                  { top: 10, left: 85, width: 15, height: 15 },
-    ];
+    const bricks = mazeData.maze[1].brick;
     let pos = state.get('characterPos');
 
     if (keyboard.get('up')) {
@@ -27,8 +21,8 @@ const mainScene = {
     if (keyboard.get('right')) {
       pos = mainScene.moveSingleAxis(1, 0, bricks, pos);
     }
-    console.log(pos.get(0));
-    console.log(pos.get(1));
+    // console.log(pos.get(0));
+    // console.log(pos.get(1));
 
     store.dispatch(actions.characterPos(pos));
   },
@@ -65,5 +59,6 @@ const mainScene = {
     console.log(collideList(bricks, { top: 10, left: 10, width: 15, height: 15 }));
   },
 };
+
 
 export default mainScene;

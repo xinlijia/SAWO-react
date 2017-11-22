@@ -1,6 +1,6 @@
 import event from '../../util/event';
 import actions from '../../actions';
-import mainScene from '../mainScene';
+import states from '../states';
 
 
 const down = (store) => {
@@ -10,7 +10,7 @@ const down = (store) => {
     begin: 0,
     interval: 5,
     callback: () => {
-      mainScene.characterUpdate(store);
+      states.update();
     },
   });
 };

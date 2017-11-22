@@ -1,0 +1,6 @@
+{"maze":
+  [
+    {"stage_id": 1,"brick":[{"top":10, "left": 10, "width": 15, "height": 15}, {"top":35, "left": 30, "width": 15, "height": 15}], "mech":[], "tool":[], "move":[]},
+    {"stage_id": 2,"brick":[{"top":100, "left": 100, "width": 15, "height": 15}, {"top":135, "left": 130, "width": 15, "height": 15}], "mech":[], "tool":[], "move":[]}
+  ]
+}
