@@ -1,4 +1,8 @@
 export const CHARACTERPOS = 'CHARACTERPOS';
+export const CHARACTERDIR = 'CHARACTERDIR';
+export const CHARACTERSTILL = 'CHARACTERSTILL';
+
+
 export const SCENE = 'SCENE';
 export const MAZETOOLS = 'MAZETOOLS';
 

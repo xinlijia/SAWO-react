@@ -19,6 +19,9 @@ const up = (store) => {
   store.dispatch(actions.keyboard.left(false));
   event.up({
     key: 'left',
+    callback: () => {
+      states.update();
+    },
   });
 };
 

@@ -10,7 +10,23 @@ function characterPos(data) {
 }
 
 
+function characterDir(data) {
+  return {
+    type: reducerType.CHARACTERDIR,
+    data,
+  };
+}
+function characterStill(data) {
+  return {
+    type: reducerType.CHARACTERSTILL,
+    data,
+  };
+}
+
 export default {
   keyboard,
   characterPos,
+  characterDir,
+  characterStill,
+
 };

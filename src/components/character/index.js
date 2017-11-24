@@ -1,14 +1,17 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import Sprite from '../sprite';
+import cn from 'classnames';
+import style from './index.less';
+
 
 export default class Character extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      top: 100,
-      left: 100,
+      pos: { top: 0, left: 0 },
+      dir: 'down',
+      still: true,
     };
   }
 
@@ -18,20 +21,36 @@ export default class Character extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.onChange(nextProps);
   }
-  shouldComponentUpdate({ pos }) {
+  shouldComponentUpdate(nextProps = {}) {
     const props = this.props;
-    return pos !== props.pos;
+    return nextProps.pos !== props.pos ||
+            nextProps.dir !== props.dir ||
+            nextProps.still !== props.still;
   }
-  onChange({ pos }) {
+  onChange(nextProps = {}) {
     this.setState({
-      top: pos.get(0),
-      left: pos.get(1),
+      pos: { top: nextProps.pos.get(0), left: nextProps.pos.get(1) },
+      dir: nextProps.dir,
+      still: nextProps.still,
     });
   }
   render() {
+    const top = this.state.pos.top;
+    const left = this.state.pos.left;
+    const dir = this.state.dir;
+    const still = this.state.still ? 'still' : 'move';
+    console.log(still);
+    console.log(dir);
     return (
       <div>
-        <Sprite pos={this.props.pos} />
+        <div
+          className={cn({
+            [style.sprite]: true,
+            [style[still]]: true,
+            [style[dir]]: true,
+          })}
+          style={{ top, left }}
+        />
       </div>
     );
   }
@@ -40,4 +59,5 @@ export default class Character extends React.Component {
 
 Character.propTypes = {
   pos: propTypes.object.isRequired,
+  dir: propTypes.string.isRequired,
 };

@@ -1,6 +1,25 @@
-.icon {
-    cursor: pointer;
-    width: 200px;
-    height: 200px;
-    background-color: #cca;
+.sprite{
+  // background: url('../../../resource/image/start_icon.png');
+  background-size: contain;
+
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  &.start_icon {
+      background-image: url("@{image-base-url}/start_icon.png");
+      &:hover {
+          background-image: url("@{image-base-url}/start_icon_p.png");
+      }
+  }
+  &.pause_icon {
+      background-image: url("@{image-base-url}/pause_icon.png");
+      &:hover {
+          background-image: url("@{image-base-url}/pause_icon_p.png");
+      }
+  }
+
 }
+
+
+@image-base-url: "../../resource/image/";

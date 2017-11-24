@@ -1,0 +1,112 @@
+.sprite{
+  position: absolute;
+  background-size: contain;
+  width: 19px;
+  height: 25px;
+
+  &.still{
+    &.down{
+      background-image: url('@{image-base-url}/down_s.png');
+    }
+    &.up{
+      background-image: url('@{image-base-url}/up_s.png');
+    }
+    &.left{
+      background-image: url('@{image-base-url}/left_s.png');
+    }
+    &.right{
+      background-image: url('@{image-base-url}/right_s.png');
+    }
+  }
+  &.move{
+    &.down{
+      -webkit-animation-name: down; /* Safari 4.0 - 8.0 */
+      -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+      -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+      animation-name: down;
+      animation-duration: 0.5s;
+      animation-iteration-count: infinite;
+    }
+    &.up{
+      -webkit-animation-name: up; /* Safari 4.0 - 8.0 */
+      -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+      -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+      animation-name: up;
+      animation-duration: 0.5s;
+      animation-iteration-count: infinite;
+    }
+    &.left{
+      -webkit-animation-name: left; /* Safari 4.0 - 8.0 */
+      -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+      -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+      animation-name: left;
+      animation-duration: 0.5s;
+      animation-iteration-count: infinite;
+    }
+    &.right{
+      -webkit-animation-name: right; /* Safari 4.0 - 8.0 */
+      -webkit-animation-duration: 0.5s; /* Safari 4.0 - 8.0 */
+      -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+      animation-name: right;
+      animation-duration: 0.5s;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes down {
+  0% {background-image: url('@{image-base-url}/down1.png');}
+  50% {background-image: url('@{image-base-url}/down2.png')}
+  100% {background-image: url('@{image-base-url}/down1.png');}
+}
+
+/* Standard syntax */
+@keyframes down {
+  0% {background-image: url('@{image-base-url}/down1.png');}
+  50% {background-image: url('@{image-base-url}/down2.png')}
+  100% {background-image: url('@{image-base-url}/down1.png');}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes up {
+  0% {background-image: url('@{image-base-url}/up1.png');}
+  50% {background-image: url('@{image-base-url}/up2.png')}
+  100% {background-image: url('@{image-base-url}/up1.png');}
+}
+
+/* Standard syntax */
+@keyframes up {
+  0% {background-image: url('@{image-base-url}/up1.png');}
+  50% {background-image: url('@{image-base-url}/up2.png')}
+  100% {background-image: url('@{image-base-url}/up1.png');}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes left {
+  0% {background-image: url('@{image-base-url}/left1.png');}
+  50% {background-image: url('@{image-base-url}/left2.png')}
+  100% {background-image: url('@{image-base-url}/left1.png');}
+}
+
+/* Standard syntax */
+@keyframes left {
+  0% {background-image: url('@{image-base-url}/left1.png');}
+  50% {background-image: url('@{image-base-url}/left2.png')}
+  100% {background-image: url('@{image-base-url}/left1.png');}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes right {
+  0% {background-image: url('@{image-base-url}/right1.png');}
+  50% {background-image: url('@{image-base-url}/right2.png')}
+  100% {background-image: url('@{image-base-url}/right1.png');}
+}
+
+/* Standard syntax */
+@keyframes right {
+  0% {background-image: url('@{image-base-url}/right1.png');}
+  50% {background-image: url('@{image-base-url}/right2.png')}
+  100% {background-image: url('@{image-base-url}/right1.png');}
+}
+@image-base-url: "../../resource/image/character/";

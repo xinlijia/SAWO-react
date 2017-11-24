@@ -1,7 +1,7 @@
 import React from 'react';
 // import propTypes from 'prop-types';
-import Sprite from './sprite';
-
+import cn from 'classnames';
+import style from './index.less';
 
 export default class Icon extends React.Component {
 
@@ -11,6 +11,7 @@ export default class Icon extends React.Component {
       pos: { x: 0, y: 0 },
       dragging: false,
       offset: null,
+      type: 'start_icon',
     };
     this.onMouseUp = this.onMouseUp.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -63,11 +64,15 @@ export default class Icon extends React.Component {
 
 
   render() {
-    // transferPropsTo will merge style & other props passed into our
-    // component to also be on the child DIV.
+    const top = this.state.pos.y;
+    const left = this.state.pos.x;
+    const type = this.state.type;
     return (
       <div onMouseDown={(e) => this.onMouseDown(e)}>
-        <Sprite pos={[this.state.pos.y, this.state.pos.x]} />
+        <div
+          className={cn({ [style.sprite]: true, [style[type]]: true })}
+          style={{ top, left }}
+        />
       </div>
     );
   }

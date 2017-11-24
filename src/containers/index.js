@@ -32,7 +32,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Character pos={this.props.characterPos} />
+        <Character
+          pos={this.props.characterPos}
+          dir={this.props.characterDir}
+          still={this.props.characterStill}
+        />
         <Icon pos={List([10, 10])} />
 
         <Maze
@@ -46,6 +50,9 @@ class App extends React.Component {
 App.propTypes = {
   keyboard: propTypes.object.isRequired,
   characterPos: propTypes.object.isRequired,
+  characterDir: propTypes.string.isRequired,
+  characterStill: propTypes.bool.isRequired,
+
   mazeTools: propTypes.object.isRequired,
 
 };
@@ -53,6 +60,9 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   keyboard: state.get('keyboard'),
   characterPos: state.get('characterPos'),
+  characterDir: state.get('characterDir'),
+  characterStill: state.get('characterStill'),
+
   mazeTools: state.get('mazeTools'),
 
 });

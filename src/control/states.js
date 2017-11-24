@@ -10,7 +10,7 @@ const states = {
   update: () => {
     const state = store.getState();
     const sceneId = state.get('scene').get(0);
-    console.log(sceneId);
+    // console.log(sceneId);
     if (sceneId === 0) {
       states.mainSceneUpdate();
     }
