@@ -1,6 +1,6 @@
 import React from 'react';
 // import propTypes from 'prop-types';
-import Sprite from '../sprite0';
+import Sprite from './sprite';
 
 
 export default class Icon extends React.Component {
