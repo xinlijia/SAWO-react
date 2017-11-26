@@ -22,11 +22,17 @@ function characterStill(data) {
     data,
   };
 }
+function mazeID(data) {
+  return {
+    type: reducerType.MAZEID,
+    data,
+  };
+}
 
 export default {
   keyboard,
   characterPos,
   characterDir,
   characterStill,
-
+  mazeID,
 };

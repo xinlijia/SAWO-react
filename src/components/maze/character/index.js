@@ -40,8 +40,6 @@ export default class Character extends React.Component {
     const left = this.state.pos.left + 100;
     const dir = this.state.dir;
     const still = this.state.still ? 'still' : 'move';
-    console.log(still);
-    console.log(dir);
     return (
       <div>
         <div
@@ -61,4 +59,5 @@ export default class Character extends React.Component {
 Character.propTypes = {
   pos: propTypes.object.isRequired,
   dir: propTypes.string.isRequired,
+  still: propTypes.bool.isRequired,
 };

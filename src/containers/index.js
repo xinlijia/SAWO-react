@@ -4,7 +4,7 @@ import { List } from 'immutable';
 import { connect } from 'react-redux';
 // import classnames from 'classnames';
 import propTypes from 'prop-types';
-import Character from '../components/character';
+// import Character from '../components/character';
 import Icon from '../components/icon';
 import Maze from '../components/maze';
 // import Keyboard from '../components/keyboard';
@@ -32,17 +32,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Character
-          pos={this.props.characterPos}
-          dir={this.props.characterDir}
-          still={this.props.characterStill}
-        />
         <Icon pos={List([10, 10])} />
 
         <Maze
           tools={this.props.mazeTools}
           pos={{ top: 100, left: 100 }}
           mazeID={0}
+          characterPos={this.props.characterPos}
+          characterDir={this.props.characterDir}
+          characterStill={this.props.characterStill}
         />
       </div>
     );
@@ -63,9 +61,7 @@ const mapStateToProps = (state) => ({
   characterPos: state.get('characterPos'),
   characterDir: state.get('characterDir'),
   characterStill: state.get('characterStill'),
-
   mazeTools: state.get('mazeTools'),
-
 });
 
 export default connect(mapStateToProps)(App);

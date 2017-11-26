@@ -6,7 +6,8 @@ const mainScene = {
   characterUpdate: (store) => {
     const state = store.getState();
     const keyboard = state.get('keyboard');
-    const bricks = mazeData[1].brick;
+    const mazeID = state.get('mazeID');
+    const bricks = mazeData[mazeID].brick;
     let pos = state.get('characterPos');
     let dir = state.get('characterDir');
     let still = true;
@@ -33,9 +34,6 @@ const mainScene = {
 
     // console.log(pos.get(0));
     // console.log(pos.get(1));
-    console.log('update');
-
-    console.log(still);
 
     store.dispatch(actions.characterPos(pos));
     store.dispatch(actions.characterDir(dir));
@@ -66,10 +64,10 @@ const mainScene = {
       }
     }
     if (res.get(0) > 200) {
-      res = res.set(0, 300);
+      res = res.set(0, 200);
     }
     if (res.get(1) > 200) {
-      res = res.set(1, 300);
+      res = res.set(1, 200);
     }
     if (res.get(0) < 0) {
       res = res.set(0, 0);
@@ -81,6 +79,9 @@ const mainScene = {
   },
   iconUpdate: () => {
     //
+  },
+  mazeUpdate: (store, mazeID) => {
+    store.dispatch(actions.mazeID(mazeID));
   },
 
   test: () => {
