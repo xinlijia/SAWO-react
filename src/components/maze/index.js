@@ -8,8 +8,9 @@ export default class Maze extends React.Component {
   constructor() {
     super();
     this.state = {
+      pos: { top: 0, left: 0 },
       tools: [],
-      bricks: mazeData.maze[1].brick,
+      bricks: mazeData[1].brick,
     };
   }
 
@@ -19,23 +20,28 @@ export default class Maze extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.onChange(nextProps);
   }
-  shouldComponentUpdate({ tools }) {
+  shouldComponentUpdate(nextProps = {}) {
     const props = this.props;
-    return tools !== props.tools;
+    return nextProps.tools !== props.tools;
   }
-  onChange({ tools }) {
+  onChange(nextProps = {}) {
     this.setState({
-      tools,
+      tools: nextProps.tools,
+      pos: nextProps.pos,
     });
   }
   render() {
+    const top = this.state.pos.top;
+    const left = this.state.pos.left;
     return (
       <div>
         {this.state.bricks.map((item, index) =>
           <Brick
             key={index}
-            top={this.props.pos[0] + item.top}
-            left={this.props.pos[1] + item.left}
+            top={top + item.top}
+            left={left + item.left}
+            width={item.width}
+            height={item.height}
           />)}
       </div>
     );
@@ -46,5 +52,5 @@ export default class Maze extends React.Component {
 Maze.propTypes = {
   mazeID: propTypes.number.isRequired,
   tools: propTypes.object.isRequired,
-  pos: propTypes.array.isRequired,
+  pos: propTypes.object.isRequired,
 };

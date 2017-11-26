@@ -35,8 +35,9 @@ export default class Character extends React.Component {
     });
   }
   render() {
-    const top = this.state.pos.top;
-    const left = this.state.pos.left;
+    // displacement for maze
+    const top = this.state.pos.top + 100;
+    const left = this.state.pos.left + 100;
     const dir = this.state.dir;
     const still = this.state.still ? 'still' : 'move';
     console.log(still);

@@ -17,10 +17,12 @@ export default class Brick extends React.Component {
   render() {
     const top = this.props.top;
     const left = this.props.left;
+    const width = this.props.width;
+    const height = this.props.height;
     return (
       <div
         className={cn({ [style.brick]: true })}
-        style={{ top, left }}
+        style={{ top, left, width, height }}
       />
     );
   }
@@ -29,4 +31,6 @@ export default class Brick extends React.Component {
 Brick.propTypes = {
   top: propTypes.number.isRequired,
   left: propTypes.number.isRequired,
+  width: propTypes.number.isRequired,
+  height: propTypes.number.isRequired,
 };

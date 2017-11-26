@@ -6,7 +6,7 @@ const mainScene = {
   characterUpdate: (store) => {
     const state = store.getState();
     const keyboard = state.get('keyboard');
-    const bricks = mazeData.maze[1].brick;
+    const bricks = mazeData[1].brick;
     let pos = state.get('characterPos');
     let dir = state.get('characterDir');
     let still = true;
@@ -64,6 +64,18 @@ const mainScene = {
           res = res.set(0, b.top + b.height);
         }
       }
+    }
+    if (res.get(0) > 200) {
+      res = res.set(0, 300);
+    }
+    if (res.get(1) > 200) {
+      res = res.set(1, 300);
+    }
+    if (res.get(0) < 0) {
+      res = res.set(0, 0);
+    }
+    if (res.get(1) < 0) {
+      res = res.set(1, 0);
     }
     return res;
   },

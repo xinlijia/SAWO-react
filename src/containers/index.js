@@ -41,7 +41,8 @@ class App extends React.Component {
 
         <Maze
           tools={this.props.mazeTools}
-          pos={[0, 0]}
+          pos={{ top: 100, left: 100 }}
+          mazeID={0}
         />
       </div>
     );
