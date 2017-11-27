@@ -2,6 +2,10 @@ export const CHARACTERPOS = 'CHARACTERPOS';
 export const CHARACTERDIR = 'CHARACTERDIR';
 export const CHARACTERSTILL = 'CHARACTERSTILL';
 
+export const TIMELINEPOS = 'TIMELINEPOS';
+export const TIMELINEMOVES = 'TIMELINEMOVES';
+export const MOVEBARMOVES = 'MOVEBARMOVES';
+
 
 export const SCENE = 'SCENE';
 export const MAZETOOLS = 'MAZETOOLS';
