@@ -9,7 +9,6 @@ export default class Character extends React.Component {
   constructor() {
     super();
     this.state = {
-      pos: { top: 0, left: 0 },
       dir: 'down',
       still: true,
     };
@@ -23,6 +22,7 @@ export default class Character extends React.Component {
   }
   shouldComponentUpdate(nextProps = {}) {
     const props = this.props;
+    // need correct for immutable
     return nextProps.pos !== props.pos ||
             nextProps.dir !== props.dir ||
             nextProps.still !== props.still;
@@ -36,8 +36,8 @@ export default class Character extends React.Component {
   }
   render() {
     // displacement for maze
-    const top = this.state.pos.top + 100;
-    const left = this.state.pos.left + 100;
+    const top = this.state.pos.top;
+    const left = this.state.pos.left;
     const dir = this.state.dir;
     const still = this.state.still ? 'still' : 'move';
     return (

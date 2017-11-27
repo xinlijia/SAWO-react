@@ -1,3 +1,5 @@
+import { List } from 'immutable';
+
 import { collideRect, collideList } from '../util/functions';
 import actions from '../actions';
 import mazeData from '../resource/maze/maze.json';
@@ -63,11 +65,11 @@ const mainScene = {
         }
       }
     }
-    if (res.get(0) > 200) {
-      res = res.set(0, 200);
+    if (res.get(0) > 200 - 25) {
+      res = res.set(0, 200 - 25);
     }
-    if (res.get(1) > 200) {
-      res = res.set(1, 200);
+    if (res.get(1) > 200 - 19) {
+      res = res.set(1, 200 - 19);
     }
     if (res.get(0) < 0) {
       res = res.set(0, 0);
@@ -81,7 +83,13 @@ const mainScene = {
     //
   },
   mazeUpdate: (store, mazeID) => {
+    const pos = mazeData[mazeID].characterPos;
+    const initialPos = List([pos.top, pos.left]);
+
     store.dispatch(actions.mazeID(mazeID));
+    store.dispatch(actions.characterPos(initialPos));
+    store.dispatch(actions.characterDir('down'));
+    store.dispatch(actions.characterStill(true));
   },
 
   test: () => {

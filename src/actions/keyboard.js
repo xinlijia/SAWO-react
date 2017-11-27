@@ -29,9 +29,17 @@ function down(data) {
   };
 }
 
+function test(data) {
+  return {
+    type: reducerType.KEY_TEST,
+    data,
+  };
+}
+
 export default {
   left,
   right,
   up,
   down,
+  test,
 };

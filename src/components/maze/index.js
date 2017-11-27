@@ -1,8 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import cn from 'classnames';
+import { List } from 'immutable';
+
 import Brick from './brick';
 import Character from './character';
 import mazeData from '../../resource/maze/maze.json';
+import style from './index.less';
+
 
 export default class Maze extends React.Component {
 
@@ -12,7 +17,7 @@ export default class Maze extends React.Component {
       pos: { top: 0, left: 0 },
       tools: [],
       id: 0,
-      characterPos: mazeData[0].characterPos,
+      characterPos: List([100, 100]),
       characterDir: 'down',
       bricks: mazeData[0].brick,
     };
@@ -33,23 +38,28 @@ export default class Maze extends React.Component {
       const newBricks = mazeData[nextProps.mazeID].brick;
       const newCharacterPos = mazeData[nextProps.mazeID].characterPos;
       this.setState({
+        id: nextProps.mazeID,
         bricks: newBricks,
-        characterPos: newCharacterPos,
+        characterPos: List([newCharacterPos.top, newCharacterPos.left]),
+      });
+    } else {
+      this.setState({
+        tools: nextProps.tools,
+        pos: nextProps.pos,
+        characterPos: nextProps.characterPos,
+        characterDir: nextProps.characterDir,
+        characterStill: nextProps.characterStill,
       });
     }
-    this.setState({
-      tools: nextProps.tools,
-      pos: nextProps.pos,
-      characterPos: nextProps.characterPos,
-      characterDir: nextProps.characterDir,
-      characterStill: nextProps.characterStill,
-    });
   }
   render() {
     const top = this.state.pos.top;
     const left = this.state.pos.left;
     return (
-      <div>
+      <div
+        className={cn({ [style.maze]: true })}
+        style={{ top, left }}
+      >
         <Character
           pos={this.state.characterPos}
           dir={this.state.characterDir}
@@ -58,8 +68,8 @@ export default class Maze extends React.Component {
         {this.state.bricks.map((item, index) =>
           <Brick
             key={index}
-            top={top + item.top}
-            left={left + item.left}
+            top={item.top}
+            left={item.left}
             width={item.width}
             height={item.height}
           />)}

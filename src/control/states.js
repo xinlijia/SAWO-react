@@ -19,7 +19,6 @@ const states = {
     mainScene.characterUpdate(store);
     mainScene.iconUpdate(store);
   },
-
 };
 
 export default states;

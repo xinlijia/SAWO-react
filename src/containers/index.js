@@ -37,7 +37,7 @@ class App extends React.Component {
         <Maze
           tools={this.props.mazeTools}
           pos={{ top: 100, left: 100 }}
-          mazeID={0}
+          mazeID={this.props.mazeID}
           characterPos={this.props.characterPos}
           characterDir={this.props.characterDir}
           characterStill={this.props.characterStill}
@@ -51,9 +51,8 @@ App.propTypes = {
   characterPos: propTypes.object.isRequired,
   characterDir: propTypes.string.isRequired,
   characterStill: propTypes.bool.isRequired,
-
   mazeTools: propTypes.object.isRequired,
-
+  mazeID: propTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -62,6 +61,7 @@ const mapStateToProps = (state) => ({
   characterDir: state.get('characterDir'),
   characterStill: state.get('characterStill'),
   mazeTools: state.get('mazeTools'),
+  mazeID: state.get('mazeID'),
 });
 
 export default connect(mapStateToProps)(App);

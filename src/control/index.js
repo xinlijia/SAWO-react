@@ -6,6 +6,7 @@ const keyboard = {
   38: 'up',
   39: 'right',
   40: 'down',
+  84: 'test',
   // 32: 'space',
   // 83: 's',
   // 82: 'r',
