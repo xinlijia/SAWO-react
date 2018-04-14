@@ -1,0 +1,30 @@
+.test{
+    background-color: rgba(52, 73, 94, 0.75);
+    width: 40px; 
+    height: 30px;
+    top: 100;
+    left: 100;
+}
+
+.sprite{
+    background-size: contain;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+#start_icon{
+    background-image: url("./resource/image/start_icon.png");
+
+}
+#start_icon:hover{
+    background-image: url("./resource/image/start_icon_p.png");
+}
+
+#pause_icon{
+    background-image: url("./resource/image/pause_icon.png");
+
+}
+#pause_icon:hover{
+    background-image: url("./resource/image/pause_icon_p.png");
+}

@@ -1,0 +1,11 @@
+.move_bar{
+    position: absolute;
+
+    background-image: url("./resource/image/move_bar.png");
+}
+
+
+.time_line{
+    position: absolute;
+    background-image: url("./resource/image/character_timeline.png");
+}

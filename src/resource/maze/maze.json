@@ -1,4 +1,5 @@
 [
-  {"stage_id": 1,"characterPos":{"top": 100, "left": 100}, "brick":[{"top":0, "left": 0, "width": 15, "height": 15}], "mech":[], "tool":[], "move":[]},
-  {"stage_id": 2,"characterPos":{"top": 100, "left": 100}, "brick":[{"top":0, "left": 0, "width": 150, "height": 15}, {"top":15, "left": 0, "width": 15, "height": 150}, {"top":165, "left": 0, "width": 150, "height": 15}, {"top":15, "left": 135, "width": 15, "height": 150}], "mech":[], "tool":[], "move":[]}
+  {"stage_id": 0,"character_pos":{"top": 100, "left": 100}, "character_dir": "u", "brick":[{"top":0, "left": 0, "width": 15, "height": 15}], "mech":[], "tool":[], "move":{"move_up":1, "move_down":1}},
+  {"stage_id": 1,"character_pos":{"top": 100, "left": 100}, "character_dir": "u", "brick":[{"top":0, "left": 0, "width": 150, "height": 15}, {"top":15, "left": 0, "width": 15, "height": 150}, {"top":165, "left": 0, "width": 150, "height": 15}, {"top":15, "left": 135, "width": 15, "height": 150}], "mech":[], "tool":[], "move":[]},
+  {"stage_id": 2,"character_pos":{"top": 100, "left": 100}, "characterdir": "u", "brick":[{"top":0, "left": 0, "width": 150, "height": 15}, {"top":15, "left": 0, "width": 15, "height": 150}, {"top":165, "left": 0, "width": 150, "height": 15}, {"top":15, "left": 135, "width": 15, "height": 150}], "mech":[], "tool":[], "move":[]}
 ]

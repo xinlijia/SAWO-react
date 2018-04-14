@@ -1,8 +1,20 @@
-# SAWO-react
+# Card substite app of board game - The Resistance: Avalon
+Simulate the cards and process in the board game.
 
-## TODO List
+1. Installation
 
-1. title scene, choose scene
-  1. choose stage event cause reducer mazeID and scene change, then the render of maze and scene change
+    1. Install create-react-app and create a new app
+        ```
+        npm install -g create-react-app
+        create-react-app my-app
+        ```
+    2. Download the code and replace the new created ones
 
-2. add timeline bar, move bar and tool bar
+    3. Change to the directory of the App and run the App
+        ```
+        cd my-app
+        npm start
+        ```
+2. Github Deployment
+
+    see [gh-pages deploy](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment)

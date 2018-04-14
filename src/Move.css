@@ -1,0 +1,17 @@
+.sprite{
+    background-size: contain;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+#move_up{
+    background-image: url("./resource/image/move-up.png");
+
+}
+
+
+#move_down{
+    background-image: url("./resource/image/move-down.png");
+
+}
