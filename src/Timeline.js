@@ -13,14 +13,14 @@ class Timeline extends Component {
             // kye: time, value: type
             timeline_dic: {},
             move_rect:{
-                top: this.props.pos.top,
-                left: this.props.pos.left,
+                top: 20,
+                left: 25,
                 width: 300,
                 height: 30,
             },
             timeline_rect:{
-                top: this.props.pos.top + 100,
-                left: this.props.pos.left + 20,
+                top: 100,
+                left: 50,
                 width: 250,
                 height: 10,
             },
@@ -88,8 +88,8 @@ class Timeline extends Component {
                 <Move
                     type={key}
                     pos={ {
-                        top: 0, 
-                        left: 30 * i + 30,
+                        top: this.state.move_rect.top, 
+                        left: this.state.move_rect.left + 60 * i + 10,
                     } }
                     move_rect={this.state.move_rect}
                     timeline_rect={this.state.timeline_rect}
@@ -106,7 +106,7 @@ class Timeline extends Component {
                 <Move
                     type={this.state.timeline_dic[key]}
                     pos={ {
-                        top: 100, 
+                        top: this.state.timeline_rect.top - 10, 
                         left: key,
                     } }
                     move_rect={this.state.move_rect}
@@ -121,14 +121,14 @@ class Timeline extends Component {
         console.log(this.state.move_count);
 
         return (
-            <div>
-            <div className="move_bar" 
-                style={this.state.move_rect}
-                />
-            <div className="time_line" 
-                style={this.state.timeline_rect}
-                />
-            {moves}
+            <div className='timeline'>
+                <div className="move_bar" 
+                    style={this.state.move_rect}
+                    />
+                <div className="time_line" 
+                    style={this.state.timeline_rect}
+                    />
+                {moves}
             </div>
         );
     }

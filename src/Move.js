@@ -48,7 +48,7 @@ class Move extends Component {
                 if(this.props.moveToTimeline(time, this.state.type)){
                     this.setState({
                         rect:{
-                            top: 90,
+                            top: this.props.timeline_rect.top - 10,
                             left: e.pageX - this.state.offset.left,
                             width: 30,
                             height: 30,
@@ -77,7 +77,7 @@ class Move extends Component {
                     this.setState({
                         container: "move",
                         rect:{
-                            top: 0,
+                            top: this.props.move_rect.top,
                             left: e.pageX - this.state.offset.left,
                             width: 30,
                             height: 30,
@@ -92,7 +92,7 @@ class Move extends Component {
                 if(this.props.updateTimeline(this.state.prev_time, new_time)){
                     this.setState({
                         rect:{
-                            top: 90,
+                            top: this.props.timeline_rect.top - 10,
                             left: new_time,
                             width: 30,
                             height: 30,
