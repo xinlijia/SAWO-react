@@ -4,13 +4,26 @@ import './Timeline.css';
 
 
 class Timeline extends Component {
+    needUpdate = false;
     constructor(props) {
         super(props);
+        let move_list = [];
+        console.log(this.props.content);
+
+        for(var i=0; i<this.props.content.length; i++){
+            var type = this.props.content[i];
+            move_list.push(
+            {'id': i, 'type': type, 'container': 'move', 'time': null, 'dragging': false,
+            'top': 20, 'left': i * 40 + 30, 'oritop': 20, 'orileft': i * 40 + 30,
+            'offtop': 0, 'offleft': 0,
+            }
+            )
+        }
+        
+        console.log(move_list);
         this.state = {
             pos: this.props.pos,
-            // key: type, value: count
-            move_count: this.props.content,
-            // kye: time, value: type
+            move_list: move_list,
             timeline_dic: {},
             move_rect:{
                 top: 20,
@@ -26,101 +39,131 @@ class Timeline extends Component {
             },
             running: false,
         };
-        this.updateTimeline = this.updateTimeline.bind(this)
-        this.timelineToMove = this.timelineToMove.bind(this)
-        this.moveToTimeline = this.moveToTimeline.bind(this)
-
+        this.updateMove = this.updateMove.bind(this);
     }
 
-    updateTimeline(original_time, new_time){
+    updateTimeline(id, new_time){
         if (new_time in this.state.timeline_dic){
             return false;
         }
-        var type = this.state.timeline_dic[original_time];
+        let new_move_list = Object.assign({}, this.move_list);
+        var original_time = new_move_list[id].time;
+        new_move_list[id].time = new_time
         let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
         delete new_timeline_dic[original_time];
-        new_timeline_dic[new_time] = type;
+        new_timeline_dic[new_time] = id;
         this.setState({
             timeline_dic: new_timeline_dic,
+            move_list: new_move_list,
         });
-        console.log(this.state.timeline_dic);
 
         return true;    
     }
-    moveToTimeline(time, type){
-        if (time in this.state.timeline_dic || this.state.move_count[type] <= 0){
-            return false;
+
+    moveToTimeline(time, id){
+        if (time in this.state.timeline_dic){
+            return false
         }
-        let new_move_count = Object.assign({}, this.state.move_count);
-        new_move_count[type]--;
+        let new_move_list = Object.assign({}, this.state.move_list);
+        new_move_list[id].time = time;
+        new_move_list[id].container = 'timeline';
+
         let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
-        new_timeline_dic[time] = type;
+        new_timeline_dic[time] = id;
         this.setState({
-            move_count: new_move_count,
+            move_list: new_move_list,
             timeline_dic: new_timeline_dic,
         });
-        return true;
+        return true
     }
-    timelineToMove(time, type){
+    timelineToMove(time, id){
         if (!(time in this.state.timeline_dic)){
             return false;
         }
         let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
         delete new_timeline_dic[time];
 
-        let new_move_count = Object.assign({}, this.state.move_count);
-        new_move_count[type]++;
+        let new_move_list = Object.assign({}, this.state.move_list);
+        new_move_list[id].time = null;
+        new_move_list[id].container = 'move';
 
         this.setState({
-            move_count: new_move_count,
+            move_list: new_move_list,
             timeline_dic: new_timeline_dic,
         });
+
         return true;
     }
+    updateMove(id, top, left, act){
+        // manage collide here
+        if (act === 'pick'){
+            let new_move_list = this.state.move_list.map((item, index) =>
+                item
+            );
+            new_move_list[id].offtop = top;
+            new_move_list[id].offleft = left;
+            new_move_list[id].dragging = true;
+            this.setState({
+                move_list: new_move_list,
+            }); 
 
+
+        }
+        else if (act === 'drag'){
+            console.log(this.state.move_list, id);
+            let new_move_list = this.state.move_list.map((item, index) =>
+                item
+            );
+            new_move_list[id].top = top - new_move_list[id].offtop;
+            new_move_list[id].left = left - new_move_list[id].offleft;
+            // console.log(new_move_list);
+            this.setState({
+                move_list: new_move_list,
+            }); 
+        }
+        else if (act === 'drop'){
+            let new_move_list = this.state.move_list.map((item, index) =>
+                item
+            );
+            new_move_list[id].top = top - new_move_list[id].offtop;
+            new_move_list[id].left = left - new_move_list[id].offleft;
+            new_move_list[id].dragging = false;
+            // console.log(new_move_list);
+            this.setState({
+                move_list: new_move_list,
+            }); 
+        }
+   
+    }
 
     render() {
-        var moves = [];
-        var i = 0;
-        for (var key in this.state.move_count){
-            for (var j = 0; j < this.state.move_count[key]; j++){
-                moves.push(
-                <Move
-                    type={key}
-                    pos={ {
-                        top: this.state.move_rect.top, 
-                        left: this.state.move_rect.left + 60 * i + 10,
-                    } }
-                    move_rect={this.state.move_rect}
-                    timeline_rect={this.state.timeline_rect}
-                    updateTimeline={this.updateTimeline}
-                    moveToTimeline={this.moveToTimeline}
-                    timelineToMove={this.timelineToMove}
-                />
-                );
-                i++;
-            }
-        }
-        for (key in this.state.timeline_dic){
-            moves.push(
-                <Move
-                    type={this.state.timeline_dic[key]}
-                    pos={ {
-                        top: this.state.timeline_rect.top - 10, 
-                        left: key,
-                    } }
-                    move_rect={this.state.move_rect}
-                    timeline_rect={this.state.timeline_rect}
-                    updateTimeline={this.updateTimeline}
-                    moveToTimeline={this.moveToTimeline}
-                    timelineToMove={this.timelineToMove}
-                />
-                );
-        }
-        console.log(this.state.timeline_dic);
-        console.log(this.state.move_count);
+        console.log('ass',this.state.move_list);
+        let moves = this.state.move_list.map((item, index) =>
+            <Move
+                id={item.id}
+                type={item.type}
+                top={item.top}
+                left={item.left}
+                dragging={item.dragging}
+                updateMove={this.updateMove}
+            />
+        );
+        // for (var i=0; i<this.state.move_list.length; i++){
+        //     var item = this.state.move_list[i];
+        //     moves.push(            
+        //         <Move
+        //             id={item.id}
+        //             type={item.type}
+        //             top={item.top}
+        //             left={item.left}
+        //             dragging={item.dragging}
+        //             updateMove={this.updateMove}
+        //         />
+        // )
+        // };
 
         return (
+
             <div className='timeline'>
                 <div className="move_bar" 
                     style={this.state.move_rect}

@@ -6,17 +6,6 @@ class Move extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rect: {
-                top: this.props.pos.top,
-                left: this.props.pos.left,
-                width: 30,
-                height: 30,
-            },
-            prev_time: null,
-            container: "move",
-            origin_pos: this.props.pos,
-            dragging: false,
-            offset: null,
             type: this.props.type,
         };
         this.onMouseUp = this.onMouseUp.bind(this);
@@ -24,10 +13,10 @@ class Move extends Component {
     }
 
     componentDidUpdate(props, state) {
-        if (this.state.dragging && !state.dragging) {
+        if (this.props.dragging && !props.dragging) {
             document.addEventListener('mousemove', this.onMouseMove);
             document.addEventListener('mouseup', this.onMouseUp);
-        } else if (!this.state.dragging && state.dragging) {
+        } else if (!this.props.dragging && props.dragging) {
             document.removeEventListener('mousemove', this.onMouseMove);
             document.removeEventListener('mouseup', this.onMouseUp);
         }
@@ -38,127 +27,52 @@ class Move extends Component {
     }
 
     onMouseUp(e) {
-        this.setState({
-            dragging: false,
-        })
+        console.log('up');
+        const new_top = e.pageY;
+        const new_left = e.pageX;
+        this.props.updateMove(this.props.id, new_top, new_left, 'drop')
 
-        if(this.state.container === "move"){
-            var time = e.pageX - this.state.offset.left;
-            if (this.validTarget(this.props.timeline_rect)) {
-                if(this.props.moveToTimeline(time, this.state.type)){
-                    this.setState({
-                        rect:{
-                            top: this.props.timeline_rect.top - 10,
-                            left: e.pageX - this.state.offset.left,
-                            width: 30,
-                            height: 30,
-                        },
-                        container: "timeline",
-                        prev_time: time,
-                        // origin_pos: {top: 90, left: time}
-                    }
-                    );
-                }
-            }
-            else{
-                this.setState({
-                    rect:{
-                        top: this.state.origin_pos.top,
-                        left: this.state.origin_pos.left,
-                        width: 30,
-                        height: 30,
-                    },
-                })
-            }
-        }
-        else{
-            if (this.validTarget(this.props.move_rect)) {
-                if(this.props.timelineToMove(this.state.prev_time, this.state.type)){
-                    this.setState({
-                        container: "move",
-                        rect:{
-                            top: this.props.move_rect.top,
-                            left: e.pageX - this.state.offset.left,
-                            width: 30,
-                            height: 30,
-                        },                       
-                    }
-                    );
-                }
-            }
-            else if(this.validTarget(this.props.timeline_rect)){
-                var new_time = e.pageX - this.state.offset.left;
-
-                if(this.props.updateTimeline(this.state.prev_time, new_time)){
-                    this.setState({
-                        rect:{
-                            top: this.props.timeline_rect.top - 10,
-                            left: new_time,
-                            width: 30,
-                            height: 30,
-                        },
-                        // origin_pos: {top: 90, left: new_time},
-                        prev_time: new_time,
-                    }
-                    );
-                }
-
-            }
-            else{
-                this.setState({
-                    rect:{
-                        top: this.state.origin_pos.top,
-                        left: this.state.origin_pos.left,
-                        width: 30,
-                        height: 30,
-                    },
-                })
-            }
-        }
         e.stopPropagation();
         e.preventDefault();
     }
 
     onMouseMove(e) {
-        if (!this.state.dragging) return;
-        this.setState({
-            rect: {
-                top: e.pageY - this.state.offset.top,
-                left: e.pageX - this.state.offset.left,
-                width: 30,
-                height: 30,
-            },
-        });
+        console.log('move');
+
+        if (!this.props.dragging) return;
+        const new_top = e.pageY;
+        const new_left = e.pageX;
+        this.props.updateMove(this.props.id, new_top, new_left, 'drag')
         e.stopPropagation();
         e.preventDefault();
     }
 
     onMouseDown(e) {
+        console.log('down');
+
         // only left mouse button
         if (e.button !== 0) return;
-        this.setState({
-            dragging: true,
-            offset: {
-                top: e.pageY - this.state.rect.top,
-                left: e.pageX - this.state.rect.left,
-            },
-            origin_pos: {top: this.state.rect.top, left: this.state.rect.left}
-        });
+        const offset_top = e.pageY - this.props.top;
+        const offset_left = e.pageX - this.props.left;
+
+        this.props.updateMove(this.props.id, offset_top, offset_left, 'pick')
+
         e.stopPropagation();
         e.preventDefault();
+
     }
 
 
     render() {
-        const top = this.state.rect.top;
-        const left = this.state.rect.left;
-        const type = this.state.type;
+        console.log(this.props.top);
+        console.log(this.props.left);
 
-        console.log("prev");
-        console.log(this.state.prev_time);
         return (
             <div onMouseDown={(e) => this.onMouseDown(e)}>
-                <div className="sprite" id={type} style={{top: top, left:left}}/ >
+                <div 
+                className="sprite" 
+                id={this.state.type} 
+                style={{top: this.props.top, left:this.props.left}}/ >
             </div>
 
         );
