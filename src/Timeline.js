@@ -41,58 +41,6 @@ class Timeline extends Component {
         this.updateMove = this.updateMove.bind(this);
     }
 
-    updateTimeline(id, new_time){
-        if (new_time in this.state.timeline_dic){
-            return false;
-        }
-        let new_move_list = Object.assign({}, this.move_list);
-        var original_time = new_move_list[id].time;
-        new_move_list[id].time = new_time
-        let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
-        delete new_timeline_dic[original_time];
-        new_timeline_dic[new_time] = id;
-        this.setState({
-            timeline_dic: new_timeline_dic,
-            move_list: new_move_list,
-        });
-
-        return true;    
-    }
-
-    moveToTimeline(time, id){
-        if (time in this.state.timeline_dic){
-            return false
-        }
-        let new_move_list = Object.assign({}, this.state.move_list);
-        new_move_list[id].time = time;
-        new_move_list[id].container = 'timeline';
-
-        let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
-        new_timeline_dic[time] = id;
-        this.setState({
-            move_list: new_move_list,
-            timeline_dic: new_timeline_dic,
-        });
-        return true
-    }
-    timelineToMove(time, id){
-        if (!(time in this.state.timeline_dic)){
-            return false;
-        }
-        let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
-        delete new_timeline_dic[time];
-
-        let new_move_list = Object.assign({}, this.state.move_list);
-        new_move_list[id].time = null;
-        new_move_list[id].container = 'move';
-
-        this.setState({
-            move_list: new_move_list,
-            timeline_dic: new_timeline_dic,
-        });
-
-        return true;
-    }
     updateMove(id, top, left, act){
         // manage collide here
         if (act === 'pick'){
