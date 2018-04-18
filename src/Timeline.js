@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Move from './Move';
 import './Timeline.css';
+import { collideRect } from './util/functions.js'
 
 
 class Timeline extends Component {
@@ -8,7 +9,6 @@ class Timeline extends Component {
     constructor(props) {
         super(props);
         let move_list = [];
-        console.log(this.props.content);
 
         for(var i=0; i<this.props.content.length; i++){
             var type = this.props.content[i];
@@ -20,7 +20,6 @@ class Timeline extends Component {
             )
         }
         
-        console.log(move_list);
         this.state = {
             pos: this.props.pos,
             move_list: move_list,
@@ -110,13 +109,11 @@ class Timeline extends Component {
 
         }
         else if (act === 'drag'){
-            console.log(this.state.move_list, id);
             let new_move_list = this.state.move_list.map((item, index) =>
                 item
             );
             new_move_list[id].top = top - new_move_list[id].offtop;
             new_move_list[id].left = left - new_move_list[id].offleft;
-            // console.log(new_move_list);
             this.setState({
                 move_list: new_move_list,
             }); 
@@ -125,10 +122,45 @@ class Timeline extends Component {
             let new_move_list = this.state.move_list.map((item, index) =>
                 item
             );
-            new_move_list[id].top = top - new_move_list[id].offtop;
-            new_move_list[id].left = left - new_move_list[id].offleft;
-            new_move_list[id].dragging = false;
-            // console.log(new_move_list);
+            var move = new_move_list[id]
+            const rect = {top: move.top, left: move.left, width: 30, height: 30}
+
+            if(move.container === 'move'){
+                var time = left - new_move_list[id].offleft
+                if(collideRect(rect, this.state.timeline_rect) && !(time in this.state.timeline_dic)){
+                    move.left = time;
+                    move.top = this.state.timeline_rect.top - 10;
+                }
+                else{
+                    move.left = move.orileft;
+                    move.top = move.oritop;
+                }
+            }
+            else{
+                time = left - new_move_list[id].offleft
+
+                if(collideRect(rect, this.state.move_rect)){
+                    // TODO
+                    move.left = left;
+                    move.top = this.state.move_rect.top;
+                }
+                else if (collideRect(rect, this.state.timeline_rect) && !(time in this.state.timeline_dic)){
+                    let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
+                    delete this.state.timeline_dic[move.time];
+                    new_timeline_dic[time] = id;
+                    this.setState({
+                        timeline_dic: new_timeline_dic,
+                    })
+                    move.time = time;
+                    move.top = this.state.timeline_rect.top - 10;
+                }
+                else{
+                    move.left = move.orileft;
+                    move.top = move.oritop;
+                }
+            }
+            move.dragging = false;  
+
             this.setState({
                 move_list: new_move_list,
             }); 
@@ -137,9 +169,9 @@ class Timeline extends Component {
     }
 
     render() {
-        console.log('ass',this.state.move_list);
         let moves = this.state.move_list.map((item, index) =>
             <Move
+                key={item.id}
                 id={item.id}
                 type={item.type}
                 top={item.top}
