@@ -37,10 +37,159 @@ class Timeline extends Component {
                 width: 250,
                 height: 10,
             },
-            running: false,
+            character:{
+                dir: 'd',
+                still: 'still',
+                // initial pos by maze data
+                top: 150,
+                left: 150,
+                speed: 100,
+            },
+            timeline_time: 50,
         };
         this.updateMove = this.updateMove.bind(this);
+        this.frame = this.frame.bind(this);
+
     }
+    frame(){
+        if(this.props.running){
+            this.updateAll(this.props.maze, 1.0/50);
+        }
+    }
+    componentDidMount(){
+        this.interval = setInterval(this.frame, 20);
+    }
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }
+
+    updateAll(maze, dt){
+        this.updateTimelinePointer(dt)
+        this.updateCharacter(maze, dt)
+
+    }
+
+    updateTimelinePointer(dt){
+        if(this.props.running){
+            let time_now = this.state.timeline_time;
+            // manage movement here
+            if(time_now in this.state.timeline_dic){
+                let move = this.state.move_list[this.state.timeline_dic[time_now]];
+                if(move.type === 'move_up'){
+                    this.moveUp();
+                }
+                else if(move.type === 'move_down'){
+                    this.moveDown();
+                }
+            }
+
+
+            if(time_now + dt * 50 < 300){
+                this.setState({
+                    timeline_time: this.state.timeline_time + dt * 50,
+                });
+            }
+            
+
+        }
+    }
+
+    
+    moveUp(){
+        if(this.props.running){
+            let new_character = Object.assign({}, this.state.character);
+            new_character.dir = 'u';
+            new_character.still = 'moving';
+            this.setState({
+                character: new_character,
+            });
+        }
+    }
+
+    moveDown(){
+        if(this.props.running){
+            let new_character = Object.assign({}, this.state.character);
+            new_character.dir = 'd';
+            new_character.still = 'moving';
+            this.setState({
+                character: new_character,
+            });
+        }
+    }
+
+    moveLeft(){
+        if(this.props.running){
+            let new_character = Object.assign({}, this.state.character);
+            new_character.dir = 'l';
+            new_character.still = 'moving';
+            this.setState({
+                character: new_character,
+            });
+        }
+    }
+
+    moveRight(){
+        if(this.props.running){
+            let new_character = Object.assign({}, this.state.character);
+            new_character.dir = 'r';
+            new_character.still = 'moving';
+            this.setState({
+                character: new_character,
+            });
+        }
+    }
+    stop(){
+        if(this.props.running){
+            let new_character = Object.assign({}, this.state.character);
+            new_character.speed = 0;
+            new_character.still = 'still';
+            this.setState({
+                character: new_character,
+            });
+        }
+    }
+    updateCharacter(maze, dt){
+        console.log('dt', dt);
+        let character = this.state.character;
+        if(this.props.running && character.still === 'moving'){
+            if(character.dir === 'l'){
+                this.move(maze, -character.speed * dt, 0);
+            }
+            if(character.dir === 'r'){
+                this.move(maze, character.speed * dt, 0);
+            }
+            if(character.dir === 'u'){
+                this.move(maze, 0, -character.speed * dt);
+            }
+            if(character.dir === 'd'){
+                this.move(maze, 0, character.speed * dt);
+            }
+        }
+
+    }
+    move(maze, dx, dy){
+
+        if(dx !== 0){
+            this.moveSingleAxis(dx, 0, maze);
+        }
+        if(dy !== 0){
+            this.moveSingleAxis(0, dy, maze);
+        }
+    }
+    moveSingleAxis(dx, dy, maze){
+        let new_character = Object.assign({}, this.state.character);
+        let character = this.state.character;
+        new_character.top = character.top + dy;
+        new_character.left = character.left + dx;
+
+        this.setState({
+            character: new_character,
+        });
+    }
+
+
+
+
 
     updateMove(id, top, left, act){
         // manage collide here
@@ -79,6 +228,14 @@ class Timeline extends Component {
                 if(collideRect(rect, this.state.timeline_rect) && !(time in this.state.timeline_dic)){
                     move.left = time;
                     move.top = this.state.timeline_rect.top - 10;
+                    move.time = time;
+                    move.container = 'timeline';
+                    let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
+                    new_timeline_dic[time] = id;
+                    this.setState({
+                        timeline_dic: new_timeline_dic,
+                    });
+                    this.props.updateTimeline(new_timeline_dic);
                 }
                 else{
                     move.left = move.orileft;
@@ -90,16 +247,25 @@ class Timeline extends Component {
 
                 if(collideRect(rect, this.state.move_rect)){
                     // TODO
-                    move.left = left;
+                    move.left = time;
                     move.top = this.state.move_rect.top;
+                    move.container = 'move';
+                    let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
+                    delete new_timeline_dic[move.time];
+                    this.setState({
+                        timeline_dic: new_timeline_dic,
+                    });
+                    this.props.updateTimeline(new_timeline_dic);
                 }
                 else if (collideRect(rect, this.state.timeline_rect) && !(time in this.state.timeline_dic)){
                     let new_timeline_dic = Object.assign({}, this.state.timeline_dic);
-                    delete this.state.timeline_dic[move.time];
+                    delete new_timeline_dic[move.time];
                     new_timeline_dic[time] = id;
                     this.setState({
                         timeline_dic: new_timeline_dic,
-                    })
+                    });
+                    this.props.updateTimeline(new_timeline_dic);
+
                     move.time = time;
                     move.top = this.state.timeline_rect.top - 10;
                 }
@@ -114,7 +280,7 @@ class Timeline extends Component {
                 move_list: new_move_list,
             }); 
         }
-   
+
     }
 
     render() {
@@ -129,22 +295,9 @@ class Timeline extends Component {
                 updateMove={this.updateMove}
             />
         );
-        // for (var i=0; i<this.state.move_list.length; i++){
-        //     var item = this.state.move_list[i];
-        //     moves.push(            
-        //         <Move
-        //             id={item.id}
-        //             type={item.type}
-        //             top={item.top}
-        //             left={item.left}
-        //             dragging={item.dragging}
-        //             updateMove={this.updateMove}
-        //         />
-        // )
-        // };
+
 
         return (
-
             <div className='timeline'>
                 <div className="move_bar" 
                     style={this.state.move_rect}
@@ -152,10 +305,13 @@ class Timeline extends Component {
                 <div className="time_line" 
                     style={this.state.timeline_rect}
                     />
+                <div className="timeline_pt"
+                    style={{top: 92, left: this.state.timeline_time - 8}}
+                />
                 {moves}
                 <Character
-                    top={100}
-                    left={100}
+                    character={this.state.character}
+                    running={this.state.running}
                  />
             </div>
         );

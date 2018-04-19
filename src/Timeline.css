@@ -7,6 +7,14 @@
     background-color: powderblue;
 }
 
+.timeline_pt{
+    position: relative;
+
+    width: 16px;
+    height: 16px;
+    background-image: url("./resource/image/timeline_pointer.png");
+
+}
 
 .move_bar{
     position: absolute;
