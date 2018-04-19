@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Move from './Move';
+import Character from './Character';
 import './Timeline.css';
 import { collideRect } from './util/functions.js'
 
@@ -152,6 +153,10 @@ class Timeline extends Component {
                     style={this.state.timeline_rect}
                     />
                 {moves}
+                <Character
+                    top={100}
+                    left={100}
+                 />
             </div>
         );
     }

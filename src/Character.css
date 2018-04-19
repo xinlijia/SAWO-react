@@ -1,0 +1,110 @@
+.character{
+    position: absolute;
+    background-size: contain;
+    width: 19px;
+    height: 25px;
+}
+
+
+.still_d{
+    background-image: url('./resource/image/character/down_s.png');
+}
+.still_u{
+    background-image: url('./resource/image/character/up_s.png');
+}
+.still_l{
+    background-image: url('./resource/image/character/left_s.png');
+}
+.still_r{
+    background-image: url('./resource/image/character/right_s.png');
+}
+
+.moving_d{
+    -webkit-animation-name: down; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+    animation-name: down;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+.moving_u{
+    -webkit-animation-name: up; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+    animation-name: up;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+.moving_l{
+    -webkit-animation-name: left; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+    animation-name: left;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+.moving_r{
+    -webkit-animation-name: right; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 0.5s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+    animation-name: right;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes down {
+    0% {background-image: url('./resource/image/character/down1.png');}
+    50% {background-image: url('./resource/image/character/down2.png')}
+    100% {background-image: url('./resource/image/character/down1.png');}
+}
+
+/* Standard syntax */
+@keyframes down {
+    0% {background-image: url('./resource/image/character/down1.png');}
+    50% {background-image: url('./resource/image/character/down2.png')}
+    100% {background-image: url('./resource/image/character/down1.png');}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes up {
+    0% {background-image: url('./resource/image/character/up1.png');}
+    50% {background-image: url('./resource/image/character/up2.png')}
+    100% {background-image: url('./resource/image/character/up1.png');}
+}
+
+/* Standard syntax */
+@keyframes up {
+    0% {background-image: url('./resource/image/character/up1.png');}
+    50% {background-image: url('./resource/image/character/up2.png')}
+    100% {background-image: url('./resource/image/character/up1.png');}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes left {
+    0% {background-image: url('./resource/image/character/left1.png');}
+    50% {background-image: url('./resource/image/character/left2.png')}
+    100% {background-image: url('./resource/image/character/left1.png');}
+}
+
+/* Standard syntax */
+@keyframes left {
+    0% {background-image: url('./resource/image/character/left1.png');}
+    50% {background-image: url('./resource/image/character/left2.png')}
+    100% {background-image: url('./resource/image/character/left1.png');}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes right {
+    0% {background-image: url('./resource/image/character/right1.png');}
+    50% {background-image: url('./resource/image/character/right2.png')}
+    100% {background-image: url('./resource/image/character/right1.png');}
+}
+
+/* Standard syntax */
+@keyframes right {
+    0% {background-image: url('./resource/image/character/right1.png');}
+    50% {background-image: url('./resource/image/character/right2.png')}
+    100% {background-image: url('./resource/image/character/right1.png');}
+}
