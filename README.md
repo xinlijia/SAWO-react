@@ -1,20 +1,9 @@
-# Card substite app of board game - The Resistance: Avalon
-Simulate the cards and process in the board game.
+# Seek A Way Out
+## implemented by React.js
 
-1. Installation
+This app is managed by npm
 
-    1. Install create-react-app and create a new app
-        ```
-        npm install -g create-react-app
-        create-react-app my-app
-        ```
-    2. Download the code and replace the new created ones
 
-    3. Change to the directory of the App and run the App
-        ```
-        cd my-app
-        npm start
-        ```
-2. Github Deployment
+1. To install the packages needed, run `npm install`
 
-    see [gh-pages deploy](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment)
+2. To start a local server for the app, run `npm start`
