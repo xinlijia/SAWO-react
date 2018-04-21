@@ -7,6 +7,7 @@
     background-color: powderblue;
 }
 
+
 .timeline_pt{
     position: relative;
 
@@ -26,4 +27,40 @@
 .time_line{
     position: absolute;
     background-image: url("./resource/image/character_timeline.png");
+}
+
+.start_pause_false{
+    position: absolute;
+    top: 180px;
+    left: 150px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-size: contain;
+
+    background-image: url("./resource/image/start_icon.png");
+
+}
+.start_pause_false:active{
+    background-image: url("./resource/image/start_icon_p.png");
+}
+.start_pause_false:focus{
+    outline:0;
+}
+.start_pause_true{
+    position: absolute;
+    top: 180px;
+    left: 150px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: url("./resource/image/pause_icon.png");
+    background-size: contain;
+
+}
+.start_pause_true:active{
+    background-image: url("./resource/image/pause_icon_p.png");
+}
+.start_pause_true:focus{
+    outline:0;
 }

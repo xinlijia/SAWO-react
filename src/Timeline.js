@@ -46,13 +46,15 @@ class Timeline extends Component {
                 speed: 100,
             },
             timeline_time: 50,
+            running: false,
         };
+        this.toggleRunning = this.toggleRunning.bind(this);
         this.updateMove = this.updateMove.bind(this);
         this.frame = this.frame.bind(this);
 
     }
     frame(){
-        if(this.props.running){
+        if(this.state.running){
             this.updateAll(this.props.maze, 1.0/50);
         }
     }
@@ -70,7 +72,7 @@ class Timeline extends Component {
     }
 
     updateTimelinePointer(dt){
-        if(this.props.running){
+        if(this.state.running){
             let time_now = this.state.timeline_time;
             // manage movement here
             if(time_now in this.state.timeline_dic){
@@ -96,7 +98,7 @@ class Timeline extends Component {
 
     
     moveUp(){
-        if(this.props.running){
+        if(this.state.running){
             let new_character = Object.assign({}, this.state.character);
             new_character.dir = 'u';
             new_character.still = 'moving';
@@ -107,7 +109,7 @@ class Timeline extends Component {
     }
 
     moveDown(){
-        if(this.props.running){
+        if(this.state.running){
             let new_character = Object.assign({}, this.state.character);
             new_character.dir = 'd';
             new_character.still = 'moving';
@@ -118,7 +120,7 @@ class Timeline extends Component {
     }
 
     moveLeft(){
-        if(this.props.running){
+        if(this.state.running){
             let new_character = Object.assign({}, this.state.character);
             new_character.dir = 'l';
             new_character.still = 'moving';
@@ -129,7 +131,7 @@ class Timeline extends Component {
     }
 
     moveRight(){
-        if(this.props.running){
+        if(this.state.running){
             let new_character = Object.assign({}, this.state.character);
             new_character.dir = 'r';
             new_character.still = 'moving';
@@ -139,7 +141,7 @@ class Timeline extends Component {
         }
     }
     stop(){
-        if(this.props.running){
+        if(this.state.running){
             let new_character = Object.assign({}, this.state.character);
             new_character.speed = 0;
             new_character.still = 'still';
@@ -149,9 +151,9 @@ class Timeline extends Component {
         }
     }
     updateCharacter(maze, dt){
-        console.log('dt', dt);
+        // console.log('dt', dt);
         let character = this.state.character;
-        if(this.props.running && character.still === 'moving'){
+        if(this.state.running && character.still === 'moving'){
             if(character.dir === 'l'){
                 this.move(maze, -character.speed * dt, 0);
             }
@@ -165,7 +167,6 @@ class Timeline extends Component {
                 this.move(maze, 0, character.speed * dt);
             }
         }
-
     }
     move(maze, dx, dy){
 
@@ -282,7 +283,12 @@ class Timeline extends Component {
         }
 
     }
-
+	toggleRunning(){
+		let running = !this.state.running;
+		this.setState({
+			running: running,
+		})
+	}
     render() {
         let moves = this.state.move_list.map((item, index) =>
             <Move
@@ -313,6 +319,8 @@ class Timeline extends Component {
                     character={this.state.character}
                     running={this.state.running}
                  />
+                <button className={'start_pause_' + this.state.running}         
+                        onClick={this.toggleRunning}/>
             </div>
         );
     }

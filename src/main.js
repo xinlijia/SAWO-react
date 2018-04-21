@@ -19,7 +19,6 @@ class Main extends Component {
 			running: false,
 		};
 		this.updateTimeline = this.updateTimeline.bind(this);
-		this.toggleRunning = this.toggleRunning.bind(this);
 	}
 
 	updateTimeline(timeline){
@@ -27,12 +26,7 @@ class Main extends Component {
 			timeline: timeline,
 		});
 	}
-	toggleRunning(){
-		let running = !this.state.running;
-		this.setState({
-			running: running,
-		})
-	}
+
   	render(){
     	return (
 			<div>
@@ -41,9 +35,9 @@ class Main extends Component {
 					pos={{top: 0, left: 0}}
 					updateTimeline={this.updateTimeline}
 					maze={mazeData[this.props.maze_id]}
-					running={this.state.running}
 				/>
-				<button onClick={this.toggleRunning}/>
+
+
 			</div>				  
     	);
 	}
