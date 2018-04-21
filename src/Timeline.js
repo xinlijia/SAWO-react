@@ -41,14 +41,16 @@ class Timeline extends Component {
                 dir: 'd',
                 still: 'still',
                 // initial pos by maze data
-                top: 150,
-                left: 150,
+                top: this.props.maze.character_pos.top,
+                left: this.props.maze.character_pos.top,
                 speed: 100,
             },
             timeline_time: 50,
             running: false,
+            maze: this.props.maze,
         };
         this.toggleRunning = this.toggleRunning.bind(this);
+        this.resetStage = this.resetStage.bind(this);
         this.updateMove = this.updateMove.bind(this);
         this.frame = this.frame.bind(this);
 
@@ -288,7 +290,47 @@ class Timeline extends Component {
 		this.setState({
 			running: running,
 		})
-	}
+    }
+    resetStage(){
+        let move_list = [];
+
+        for(var i=0; i<this.props.content.length; i++){
+            var type = this.props.content[i];
+            move_list.push(
+            {'id': i, 'type': type, 'container': 'move', 'time': null, 'dragging': false,
+            'top': 20, 'left': i * 40 + 30, 'oritop': 20, 'orileft': i * 40 + 30,
+            'offtop': 0, 'offleft': 0,
+            }
+            )
+        }
+        this.setState({
+            pos: this.props.pos,
+            move_list: move_list,
+            timeline_dic: {},
+            move_rect:{
+                top: 20,
+                left: 25,
+                width: 300,
+                height: 30,
+            },
+            timeline_rect:{
+                top: 100,
+                left: 50,
+                width: 250,
+                height: 10,
+            },
+            character:{
+                dir: 'd',
+                still: 'still',
+                // initial pos by maze data
+                top: this.props.maze.character_pos.top,
+                left: this.props.maze.character_pos.top,
+                speed: 100,
+            },
+            timeline_time: 50,
+            running: false,
+        })
+    }
     render() {
         let moves = this.state.move_list.map((item, index) =>
             <Move
@@ -321,6 +363,8 @@ class Timeline extends Component {
                  />
                 <button className={'start_pause_' + this.state.running}         
                         onClick={this.toggleRunning}/>
+                <button className={'reset'}         
+                        onClick={this.resetStage}/>
             </div>
         );
     }

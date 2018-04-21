@@ -31,8 +31,8 @@
 
 .start_pause_false{
     position: absolute;
-    top: 180px;
-    left: 150px;
+    top: 150px;
+    left: 130px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -49,8 +49,8 @@
 }
 .start_pause_true{
     position: absolute;
-    top: 180px;
-    left: 150px;
+    top: 150px;
+    left: 130px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -62,5 +62,22 @@
     background-image: url("./resource/image/pause_icon_p.png");
 }
 .start_pause_true:focus{
+    outline:0;
+}
+
+.reset{
+    position: absolute;
+    top: 150px;
+    left: 170px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-image: url("./resource/image/reset_icon.png");
+    background-size: contain;
+}
+.reset:active{
+    background-image: url("./resource/image/reset_icon_p.png");
+}
+.reset:focus{
     outline:0;
 }
