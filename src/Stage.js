@@ -49,13 +49,8 @@ class Stage extends Component {
             running: false,
             maze: this.props.maze,
         };
-        this.toggleRunning = this.toggleRunning.bind(this);
-        this.resetStage = this.resetStage.bind(this);
-        this.updateMove = this.updateMove.bind(this);
-        this.frame = this.frame.bind(this);
-
     }
-    frame(){
+    frame = () => {
         if(this.state.running){
             this.updateAll(this.props.maze, 1.0/50);
         }
@@ -194,7 +189,7 @@ class Stage extends Component {
 
 
 
-    updateMove(id, top, left, act){
+    updateMove = (id, top, left, act) => {
         // manage collide here
         if (act === 'pick'){
             let new_move_list = this.state.move_list.map((item, index) =>
@@ -285,13 +280,13 @@ class Stage extends Component {
         }
 
     }
-	toggleRunning(){
+	toggleRunning = () => {
 		let running = !this.state.running;
 		this.setState({
 			running: running,
 		})
     }
-    resetStage(){
+    resetStage = () => {
         let move_list = [];
 
         for(var i=0; i<this.props.content.length; i++){

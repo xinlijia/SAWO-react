@@ -18,10 +18,9 @@ class Main extends Component {
 			brick: mazeData[props.maze_id].brick,
 			running: false,
 		};
-		this.updateTimeline = this.updateTimeline.bind(this);
 	}
 
-	updateTimeline(timeline){
+	updateTimeline = (timeline) => {
 		this.setState({
 			timeline: timeline,
 		});
