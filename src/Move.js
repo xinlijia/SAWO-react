@@ -62,7 +62,7 @@ class Move extends Component {
         return (
             <div onMouseDown={(e) => this.onMouseDown(e)}>
                 <div 
-                className="sprite" 
+                className="move_icon" 
                 id={this.props.type} 
                 style={{top: this.props.top, left:this.props.left}}/ >
             </div>
