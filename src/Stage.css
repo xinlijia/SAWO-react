@@ -1,4 +1,4 @@
-.timeline{
+.stage{
     margin: 20px auto 0;
     position: relative;
     border-style: dashed;
@@ -7,10 +7,18 @@
     background-color: powderblue;
 }
 
+.maze{
+    top: 200px;
+    left: -3px;
+    position: relative;
+    border-style: outset;
+    width: 350px;
+    height: 350px;
+    background-color: gray;
+}
 
 .timeline_pt{
     position: relative;
-
     width: 16px;
     height: 16px;
     background-image: url("./resource/image/timeline_pointer.png");
@@ -24,7 +32,7 @@
 }
 
 
-.time_line{
+.timeline{
     position: absolute;
     background-image: url("./resource/image/character_timeline.png");
 }

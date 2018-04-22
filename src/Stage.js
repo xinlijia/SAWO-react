@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Move from './Move';
 import Character from './Character';
-import './Timeline.css';
+import './Stage.css';
 import { collideRect } from './util/functions.js'
 
 
-class Timeline extends Component {
+class Stage extends Component {
     needUpdate = false;
     constructor(props) {
         super(props);
@@ -41,8 +41,8 @@ class Timeline extends Component {
                 dir: 'd',
                 still: 'still',
                 // initial pos by maze data
-                top: this.props.maze.character_pos.top,
-                left: this.props.maze.character_pos.top,
+                top: this.props.maze.character_pos.top + 200,
+                left: this.props.maze.character_pos.left,
                 speed: 100,
             },
             timeline_time: 50,
@@ -323,8 +323,8 @@ class Timeline extends Component {
                 dir: 'd',
                 still: 'still',
                 // initial pos by maze data
-                top: this.props.maze.character_pos.top,
-                left: this.props.maze.character_pos.top,
+                top: this.props.maze.character_pos.top + 200,
+                left: this.props.maze.character_pos.left,
                 speed: 100,
             },
             timeline_time: 50,
@@ -346,15 +346,17 @@ class Timeline extends Component {
 
 
         return (
-            <div className='timeline'>
+            <div className="stage">
                 <div className="move_bar" 
                     style={this.state.move_rect}
                     />
-                <div className="time_line" 
+                <div className="timeline" 
                     style={this.state.timeline_rect}
                     />
                 <div className="timeline_pt"
                     style={{top: 92, left: this.state.timeline_time - 8}}
+                />
+                <div className="maze"
                 />
                 {moves}
                 <Character
@@ -370,4 +372,4 @@ class Timeline extends Component {
     }
 }
 
-export default Timeline;
+export default Stage;

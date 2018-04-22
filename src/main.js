@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Timeline from './Timeline.js';
+import Stage from './Stage.js';
 import mazeData from './resource/maze/maze.json';
 
 
@@ -30,7 +30,7 @@ class Main extends Component {
   	render(){
     	return (
 			<div>
-				<Timeline 
+				<Stage 
 					content={this.state.move} 
 					pos={{top: 0, left: 0}}
 					updateTimeline={this.updateTimeline}
