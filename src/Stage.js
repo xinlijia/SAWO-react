@@ -37,22 +37,16 @@ class Stage extends Component {
                 width: 250,
                 height: 10,
             },
-            character:{
-                dir: 'd',
-                still: 'still',
-                // initial pos by maze data
-                top: this.props.maze.character_pos.top + 200,
-                left: this.props.maze.character_pos.left,
-                speed: 100,
-            },
+
             timeline_time: 50,
             running: false,
             maze: this.props.maze,
         };
+
     }
     frame = () => {
         if(this.state.running){
-            this.updateAll(this.props.maze, 1.0/50);
+            this.updateAll(this.state.maze, 1.0/50);
         }
     }
     componentDidMount(){
@@ -64,8 +58,7 @@ class Stage extends Component {
 
     updateAll(maze, dt){
         this.updateTimelinePointer(dt)
-        this.updateCharacter(maze, dt)
-
+        this.character.updateCharacter(maze, dt)
     }
 
     updateTimelinePointer(dt){
@@ -75,10 +68,10 @@ class Stage extends Component {
             if(time_now in this.state.timeline_dic){
                 let move = this.state.move_list[this.state.timeline_dic[time_now]];
                 if(move.type === 'move_up'){
-                    this.moveUp();
+                    this.character.changeDir('u');
                 }
                 else if(move.type === 'move_down'){
-                    this.moveDown();
+                    this.character.changeDir('d');
                 }
             }
 
@@ -94,96 +87,7 @@ class Stage extends Component {
     }
 
     
-    moveUp(){
-        if(this.state.running){
-            let new_character = Object.assign({}, this.state.character);
-            new_character.dir = 'u';
-            new_character.still = 'moving';
-            this.setState({
-                character: new_character,
-            });
-        }
-    }
-
-    moveDown(){
-        if(this.state.running){
-            let new_character = Object.assign({}, this.state.character);
-            new_character.dir = 'd';
-            new_character.still = 'moving';
-            this.setState({
-                character: new_character,
-            });
-        }
-    }
-
-    moveLeft(){
-        if(this.state.running){
-            let new_character = Object.assign({}, this.state.character);
-            new_character.dir = 'l';
-            new_character.still = 'moving';
-            this.setState({
-                character: new_character,
-            });
-        }
-    }
-
-    moveRight(){
-        if(this.state.running){
-            let new_character = Object.assign({}, this.state.character);
-            new_character.dir = 'r';
-            new_character.still = 'moving';
-            this.setState({
-                character: new_character,
-            });
-        }
-    }
-    stop(){
-        if(this.state.running){
-            let new_character = Object.assign({}, this.state.character);
-            new_character.speed = 0;
-            new_character.still = 'still';
-            this.setState({
-                character: new_character,
-            });
-        }
-    }
-    updateCharacter(maze, dt){
-        // console.log('dt', dt);
-        let character = this.state.character;
-        if(this.state.running && character.still === 'moving'){
-            if(character.dir === 'l'){
-                this.move(maze, -character.speed * dt, 0);
-            }
-            if(character.dir === 'r'){
-                this.move(maze, character.speed * dt, 0);
-            }
-            if(character.dir === 'u'){
-                this.move(maze, 0, -character.speed * dt);
-            }
-            if(character.dir === 'd'){
-                this.move(maze, 0, character.speed * dt);
-            }
-        }
-    }
-    move(maze, dx, dy){
-
-        if(dx !== 0){
-            this.moveSingleAxis(dx, 0, maze);
-        }
-        if(dy !== 0){
-            this.moveSingleAxis(0, dy, maze);
-        }
-    }
-    moveSingleAxis(dx, dy, maze){
-        let new_character = Object.assign({}, this.state.character);
-        let character = this.state.character;
-        new_character.top = character.top + dy;
-        new_character.left = character.left + dx;
-
-        this.setState({
-            character: new_character,
-        });
-    }
+    
 
 
 
@@ -314,17 +218,10 @@ class Stage extends Component {
                 width: 250,
                 height: 10,
             },
-            character:{
-                dir: 'd',
-                still: 'still',
-                // initial pos by maze data
-                top: this.props.maze.character_pos.top + 200,
-                left: this.props.maze.character_pos.left,
-                speed: 100,
-            },
             timeline_time: 50,
             running: false,
-        })
+        });
+        this.character.resetCharacter();
     }
     render() {
         let moves = this.state.move_list.map((item, index) =>
@@ -355,7 +252,8 @@ class Stage extends Component {
                 />
                 {moves}
                 <Character
-                    character={this.state.character}
+                    onRef={ref => (this.character = ref)}
+                    maze={this.state.maze}
                     running={this.state.running}
                  />
                 <button className={'start_pause_' + this.state.running}         
