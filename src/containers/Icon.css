@@ -14,17 +14,17 @@
     border-radius: 50%;
 }
 #start_icon{
-    background-image: url("./resource/image/start_icon.png");
+    background-image: url("../resource/image/start_icon.png");
 
 }
 #start_icon:hover{
-    background-image: url("./resource/image/start_icon_p.png");
+    background-image: url("../resource/image/start_icon_p.png");
 }
 
 #pause_icon{
-    background-image: url("./resource/image/pause_icon.png");
+    background-image: url("../resource/image/pause_icon.png");
 
 }
 #pause_icon:hover{
-    background-image: url("./resource/image/pause_icon_p.png");
+    background-image: url("../resource/image/pause_icon_p.png");
 }

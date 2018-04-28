@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Stage from './Stage.js';
-import mazeData from './resource/maze/maze.json';
+import Stage from './Stage';
+import mazeData from '../resource/maze/maze.json';
 
 
 class Main extends Component {	
@@ -35,8 +35,6 @@ class Main extends Component {
 					updateTimeline={this.updateTimeline}
 					maze={mazeData[this.props.maze_id]}
 				/>
-
-
 			</div>				  
     	);
 	}

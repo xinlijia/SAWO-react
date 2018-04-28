@@ -21,20 +21,20 @@
     position: relative;
     width: 16px;
     height: 16px;
-    background-image: url("./resource/image/timeline_pointer.png");
+    background-image: url("../resource/image/timeline_pointer.png");
 
 }
 
 .move_bar{
     position: absolute;
 
-    background-image: url("./resource/image/move_bar.png");
+    background-image: url("../resource/image/move_bar.png");
 }
 
 
 .timeline{
     position: absolute;
-    background-image: url("./resource/image/character_timeline.png");
+    background-image: url("../resource/image/character_timeline.png");
 }
 
 .start_pause_false{
@@ -46,11 +46,11 @@
     border-radius: 50%;
     background-size: contain;
 
-    background-image: url("./resource/image/start_icon.png");
+    background-image: url("../resource/image/start_icon.png");
 
 }
 .start_pause_false:active{
-    background-image: url("./resource/image/start_icon_p.png");
+    background-image: url("../resource/image/start_icon_p.png");
 }
 .start_pause_false:focus{
     outline:0;
@@ -62,12 +62,12 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-image: url("./resource/image/pause_icon.png");
+    background-image: url("../resource/image/pause_icon.png");
     background-size: contain;
 
 }
 .start_pause_true:active{
-    background-image: url("./resource/image/pause_icon_p.png");
+    background-image: url("../resource/image/pause_icon_p.png");
 }
 .start_pause_true:focus{
     outline:0;
@@ -80,11 +80,11 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-image: url("./resource/image/reset_icon.png");
+    background-image: url("../resource/image/reset_icon.png");
     background-size: contain;
 }
 .reset:active{
-    background-image: url("./resource/image/reset_icon_p.png");
+    background-image: url("../resource/image/reset_icon_p.png");
 }
 .reset:focus{
     outline:0;

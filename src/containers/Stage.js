@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Move from './Move';
 import Character from './Character';
+import { connect } from "react-redux";
 import './Stage.css';
-import { collideRect } from './util/functions.js'
+import { collideRect } from '../util/functions.js'
 
-
+// TO DO 
 class Stage extends Component {
     needUpdate = false;
     constructor(props) {
@@ -265,4 +266,15 @@ class Stage extends Component {
     }
 }
 
-export default Stage;
+
+
+function mapStateToProps(state) {
+    return {
+        character: state.character,
+        stageId: state.stageId,
+
+    };
+}
+  
+export default connect(mapStateToProps)(Stage);
+  
