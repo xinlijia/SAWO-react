@@ -7,7 +7,6 @@ import { collideRect } from '../util/functions.js'
 
 // TO DO 
 class Stage extends Component {
-    needUpdate = false;
     constructor(props) {
         super(props);
         let move_list = [];
@@ -45,6 +44,9 @@ class Stage extends Component {
         };
 
     }
+
+    // these should be moved to actions
+
     frame = () => {
         if(this.state.running){
             this.updateAll(this.state.maze, 1.0/50);
