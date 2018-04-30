@@ -1,19 +1,26 @@
-function timelineToMove(move_id) {
+function updateMove(id, top, left, act) {
     return {
-        type: "TIMELINETOMOVE",
-        move: move_id,
+        type: "UPDATEMOVE",
+        id: id,
+        top: top,
+        left, left,
+        act: act,
     };
+}
+function changeStage(maze_id) {
+    return {
+        type: "CHANGESTAGE",
+        maze_id: maze_id,
+    };
+}
+function frame(){
+    return{
+        type: "FRAME",
+    }
 }
 
-function moveToTimeline(move_id, time) {
-    return {
-        type: "MOVETOTIMELINE",
-        move: move_id,
-        time: time,
-    };
-}
 
 export default {
-    timelineToMove,
-    moveToTimeline,
+    updateMove,
+    changeStage,
 };

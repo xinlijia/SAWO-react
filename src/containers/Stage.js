@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Move from './Move';
 import Character from './Character';
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { updateMove, frame } from "../actions/index";
+
 import './Stage.css';
 import { collideRect } from '../util/functions.js'
 
@@ -9,17 +12,17 @@ import { collideRect } from '../util/functions.js'
 class Stage extends Component {
     constructor(props) {
         super(props);
-        let move_list = [];
+        // let move_list = [];
 
-        for(var i=0; i<this.props.content.length; i++){
-            var type = this.props.content[i];
-            move_list.push(
-            {'id': i, 'type': type, 'container': 'move', 'time': null, 'dragging': false,
-            'top': 20, 'left': i * 40 + 30, 'oritop': 20, 'orileft': i * 40 + 30,
-            'offtop': 0, 'offleft': 0,
-            }
-            )
-        }
+        // for(var i=0; i<this.props.content.length; i++){
+        //     var type = this.props.content[i];
+        //     move_list.push(
+        //     {'id': i, 'type': type, 'container': 'move', 'time': null, 'dragging': false,
+        //     'top': 20, 'left': i * 40 + 30, 'oritop': 20, 'orileft': i * 40 + 30,
+        //     'offtop': 0, 'offleft': 0,
+        //     }
+        //     )
+        // }
         
         this.state = {
             pos: this.props.pos,
@@ -94,7 +97,7 @@ class Stage extends Component {
 
 
 
-
+    // move to reducers
 
     updateMove = (id, top, left, act) => {
         // manage collide here
@@ -272,11 +275,19 @@ class Stage extends Component {
 
 function mapStateToProps(state) {
     return {
-        character: state.character,
-        stageId: state.stageId,
+        character: state.characterReducer,
+        move_list: state.moveList,
+        timeline: state.timeline,
+        timeline_pointer: state.timelinePointer,
+        stage_id: state.stageId,
 
     };
 }
-  
-export default connect(mapStateToProps)(Stage);
+ 
+function mapDispatchToProps(dispatch) {
+    // Whenever selectBook is called, the result shoudl be passed
+    // to all of our reducers
+    return bindActionCreators({ updateMove: updateMove, frame: frame }, dispatch);
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(Stage);
   
