@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Move.css';
-import { collideRect } from './util/functions.js'
+import { collideRect } from '../util/functions.js'
 
 class Move extends Component {
     constructor(props) {

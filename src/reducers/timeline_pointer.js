@@ -1,13 +1,15 @@
-export default function(state = null, action) {
+export default function(state = 50, action) {
     switch (action.type) {
         case "CHANGESTAGE":
-            let new_state = 0;
-            return new_state;
+            return 50;
         case "RESET":
-            // same as CHANGESTAGE
-        case "FRAME":
-      
-    }
-  
-    return state;
+            return 50;
+        case "UPDATEALL":
+            if(action.running && state + action.dt * 50 < 300){
+                return state + action.dt * 50;
+            }
+            return state;
+        default:
+            return state;
+    } 
 }

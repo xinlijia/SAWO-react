@@ -4,7 +4,8 @@ export default function(state = 0, action) {
     switch (action.type) {
         case "CHANGESTAGE":
             return action.stage_id;
+        default:
+            return state;
     } 
-    return state;
 }
   
