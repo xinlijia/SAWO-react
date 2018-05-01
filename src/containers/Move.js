@@ -26,7 +26,7 @@ class Move extends Component {
     onMouseUp(e) {
         const new_top = e.pageY;
         const new_left = e.pageX;
-        this.props.updateMove(this.props.id, new_top, new_left, 'drop')
+        this.props.updateMove(this.props.id, new_top, new_left, 'drop', this.props.timeline_dic, this.props.move_list)
 
         e.stopPropagation();
         e.preventDefault();
@@ -37,7 +37,7 @@ class Move extends Component {
         if (!this.props.dragging) return;
         const new_top = e.pageY;
         const new_left = e.pageX;
-        this.props.updateMove(this.props.id, new_top, new_left, 'drag')
+        this.props.updateMove(this.props.id, new_top, new_left, 'drag', this.props.timeline_dic, this.props.move_list)
         e.stopPropagation();
         e.preventDefault();
     }
@@ -49,7 +49,7 @@ class Move extends Component {
         const offset_top = e.pageY - this.props.top;
         const offset_left = e.pageX - this.props.left;
 
-        this.props.updateMove(this.props.id, offset_top, offset_left, 'pick')
+        this.props.updateMove(this.props.id, offset_top, offset_left, 'pick', this.props.timeline_dic, this.props.move_list)
 
         e.stopPropagation();
         e.preventDefault();

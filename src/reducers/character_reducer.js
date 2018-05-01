@@ -7,7 +7,7 @@ export default function(state = null, action) {
             let new_state = {
                 dir: 'd',
                 still: 'still',
-                top: mazeData[action.maze_id].character_pos.top,
+                top: mazeData[action.maze_id].character_pos.top + 200,
                 left: mazeData[action.maze_id].character_pos.left,
                 speed: 100,
             }
@@ -16,7 +16,7 @@ export default function(state = null, action) {
             new_state = {
                 dir: 'd',
                 still: 'still',
-                top: mazeData[action.maze_id].character_pos.top,
+                top: mazeData[action.maze_id].character_pos.top + 200,
                 left: mazeData[action.maze_id].character_pos.left,
                 speed: 100,
             }
@@ -26,6 +26,7 @@ export default function(state = null, action) {
                 return state;
             }
             new_state = Object.assign({}, state);
+            // timeline move update
             if(action.time_now in action.timeline_dic){
                 let move = action.move_list[action.timeline_dic[action.time_now]];
                 if(move.type === 'move_up'){
@@ -37,13 +38,33 @@ export default function(state = null, action) {
                     new_state.still = 'moving';
                 }
             }
+            //frame update
+            const dir = state.dir;
+            const speed = state.speed;
+            //const maze = mazeData[action.maze_id];
+            if(state.still === 'moving'){
+                if(dir === 'l'){
+                    new_state.left = state.left - speed * action.dt
+                    //moveSingleAxis(-speed * dt, 0, maze);
+                }
+                if(dir === 'r'){
+                    new_state.left = state.left + speed * action.dt
+                    //moveSingleAxis(speed * dt, 0, maze);
+                }
+                if(dir === 'u'){
+                    new_state.top = state.top - speed * action.dt
 
-            return new_state
+                    //moveSingleAxis(0, -speed * dt, maze);
+                }
+                if(dir === 'd'){
+                    new_state.top = state.top + speed * action.dt
 
+                    //moveSingleAxis(0, speed * dt, maze);
+                }
+                return new_state;
+            }
+            return new_state;
 
-
-            // movement of the char
-            // manage collide here
         default:
             return state;
     }

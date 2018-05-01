@@ -29,13 +29,15 @@ function toggleRunning(){
     };
 }
 
-function updateMove(id, top, left, act) {
+function updateMove(id, top, left, act, timeline_dic, move_list) {
     return {
         type: "UPDATEMOVE",
         id: id,
         top: top,
         left: left,
         act: act,
+        timeline_dic: timeline_dic,
+        move_list: move_list,
     };
 }
 

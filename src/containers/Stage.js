@@ -11,7 +11,8 @@ import './Stage.css';
 // TO DO 
 class Stage extends Component {
     constructor(props) {
-        super(props);        
+        super(props);
+        this.props.resetStage(this.props.stage_id);        
         this.state = {
             move_rect:{
                 top: 20,
@@ -148,6 +149,11 @@ class Stage extends Component {
     // }
 
     render() {
+        if (this.props.stage_id === -1){
+            return (
+                <div> Title Scene </div>
+            );
+        }
         let moves = this.props.move_list.map((item, index) =>
             <Move
                 key={item.id}
@@ -155,6 +161,8 @@ class Stage extends Component {
                 type={item.type}
                 top={item.top}
                 left={item.left}
+                timeline_dic={this.props.timeline}
+                move_list={this.props.move_list}
                 dragging={item.dragging}
                 updateMove={this.props.updateMove}
             />
@@ -175,9 +183,9 @@ class Stage extends Component {
                 <div className="maze"
                 />
                 {moves}
-                {/* <Character
+                <Character
                     character={this.props.character}
-                 /> */}
+                 />
                 <button className={'start_pause_' + this.props.running}         
                         onClick={() => this.props.toggleRunning()}/>
                 <button className={'reset'}         
