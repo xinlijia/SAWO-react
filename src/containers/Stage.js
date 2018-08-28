@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Move from './Move';
 import Character from './Character';
+import Maze from './Maze';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "../actions/index";
@@ -87,7 +88,9 @@ class Stage extends Component {
                 {moves}
                 <Character
                     character={this.props.character}
-                 />
+                />
+                <Maze />
+
                 <button className={'start_pause_' + this.props.running}         
                         onClick={() => this.props.toggleRunning()}/>
                 <button className={'reset'}         

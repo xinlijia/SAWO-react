@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Character from './Character';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "../actions/index";
@@ -10,12 +9,16 @@ import './Maze.css';
 class Maze extends Component {
     constructor(props) {
         super(props);
-        this.props.resetMaze(this.props.stage_id);        
-        this.state = {
 
-        }
+        console.log(this.props.stage_id);
+    }
+    render() {
+        return (
+            <div>aa</div>
+        );
     }
 }
+
 function mapStateToProps(state) {
     return {
         character: state.characterReducer,
@@ -27,8 +30,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     // Whenever selectBook is called, the result shoudl be passed
     // to all of our reducers
-    return bindActionCreators({ 
-            updateMove: actions.updateMove,
+    return bindActionCreators({
             updateAll: actions.updateAll,
             toggleRunning: actions.toggleRunning,
             resetStage: actions.resetStage,
