@@ -22,28 +22,24 @@ export default function(state = {}, action) {
                 var move = action.move_list[action.id]
 
                 const rect = {top: move.top, left: move.left, width: 30, height: 30}
-
+                // move is in move list
                 if(move.container === 'move'){
-                    var time = action.left - action.move_list[action.id].offleft
-                    if(collideRect(rect, timeline_rect) && !(time in action.timeline_dic)){
 
+                    var time = action.left - action.move_list[action.id].offleft
+                    if(collideRect(rect, move_list_rect)){
                         let new_timeline_dic = Object.assign({}, state);
-                        new_timeline_dic[time] = action.id;
+                        delete new_timeline_dic[move.time];
                         return new_timeline_dic;
                     }
                 }
+                // move is in timeline
                 else{
                     time = action.left - action.move_list[action.id].offleft
 
-                    if(collideRect(rect, move_list_rect)){
-
+                    if (collideRect(rect, timeline_rect) && !(time in action.timeline_dic)){
+                        console.log('new time')
                         let new_timeline_dic = Object.assign({}, state);
-                        delete new_timeline_dic[move.time];
-                        return new_timeline_dic;
-                    }
-                    else if (collideRect(rect, timeline_rect) && !(time in action.timeline_dic)){
-                        let new_timeline_dic = Object.assign({}, state);
-                        delete new_timeline_dic[move.time];
+                        delete new_timeline_dic[move.prevtime];
                         new_timeline_dic[time] = action.id;
                         return new_timeline_dic;
 

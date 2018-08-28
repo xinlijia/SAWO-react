@@ -27,7 +27,7 @@ export default function(state = [], action) {
                 move_list.push(
                     {'id': i, 'type': type, 'container': 'move', 'time': null, 'dragging': false,
                     'top': 20, 'left': i * 40 + 30, 'oritop': 20, 'orileft': i * 40 + 30,
-                    'offtop': 0, 'offleft': 0,
+                    'offtop': 0, 'offleft': 0, 'prevtime': null,
                     }
                 )
             }
@@ -65,6 +65,7 @@ export default function(state = [], action) {
                     if(collideRect(rect, timeline_rect) && !(time in action.timeline_dic)){
                         move.left = time;
                         move.top = timeline_rect.top - 10;
+                        move.prevtime = move.time;
                         move.time = time;
                         move.container = 'timeline';
                         move.orileft = time;
@@ -86,6 +87,7 @@ export default function(state = [], action) {
                         move.oritop = move_list_rect.top;
                     }
                     else if (collideRect(rect, timeline_rect) && !(time in action.timeline_dic)){
+                        move.prevtime = move.time
                         move.time = time;
                         move.orileft = time;
                         move.top = timeline_rect.top - 10;
