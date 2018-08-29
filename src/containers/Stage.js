@@ -71,7 +71,6 @@ class Stage extends Component {
             />
         );
 
-
         return (
             <div className="stage">
                 <div className="move_bar" 
@@ -83,14 +82,16 @@ class Stage extends Component {
                 <div className="timeline_pt"
                     style={{top: 92, left: this.props.timeline_pointer - 8}}
                 />
+                {moves}
+
                 <div className="maze">                    
                     <Maze />
-                </div>
-
-                {moves}
-                <Character
+                    <Character
                     character={this.props.character}
                 />
+                </div>
+
+
 
                 <button className={'start_pause_' + this.props.running}         
                         onClick={() => this.props.toggleRunning()}/>
