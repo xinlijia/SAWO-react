@@ -83,13 +83,14 @@ class Stage extends Component {
                 <div className="timeline_pt"
                     style={{top: 92, left: this.props.timeline_pointer - 8}}
                 />
-                <div className="maze"
-                />
+                <div className="maze">                    
+                    <Maze />
+                </div>
+
                 {moves}
                 <Character
                     character={this.props.character}
                 />
-                <Maze />
 
                 <button className={'start_pause_' + this.props.running}         
                         onClick={() => this.props.toggleRunning()}/>

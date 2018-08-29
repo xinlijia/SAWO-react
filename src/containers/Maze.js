@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "../actions/index";
+import mazeData from "../resource/maze/maze.json"
 
 import './Maze.css';
 
@@ -10,11 +11,26 @@ class Maze extends Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props.stage_id);
+        console.log(mazeData);
     }
     render() {
+        let walls = mazeData[this.props.stage_id]["brick"].map((item, index) =>
+            <div
+                className={"wall"}
+                key={index}
+                style={ 
+                    {
+                        top: item.top,
+                        left: item.left,
+                        width: item.width,
+                        height: item.height,
+                    }
+                }
+                
+            />
+        );
         return (
-            <div>aa</div>
+            <div>{walls}</div>
         );
     }
 }
