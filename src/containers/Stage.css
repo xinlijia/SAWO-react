@@ -14,7 +14,7 @@
     border-style: outset;
     width: 350px;
     height: 350px;
-    background-color: gray;
+    background-image: url("../resource/image/floor.png");
 }
 
 .timeline_pt{

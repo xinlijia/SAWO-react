@@ -10,8 +10,16 @@
 
 }
 
-
 #move_down{
     background-image: url("../resource/image/move-down.png");
+
+}
+#move_left{
+    background-image: url("../resource/image/move-left.png");
+
+}
+
+#move_right{
+    background-image: url("../resource/image/move-right.png");
 
 }

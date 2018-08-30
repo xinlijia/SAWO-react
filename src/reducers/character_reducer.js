@@ -39,6 +39,14 @@ export default function(state = null, action) {
                     new_state.dir = 'd';
                     new_state.still = 'moving';
                 }
+                else if(move.type === 'move_left'){
+                    new_state.dir = 'l';
+                    new_state.still = 'moving';
+                }
+                else if(move.type === 'move_right'){
+                    new_state.dir = 'r';
+                    new_state.still = 'moving';
+                }
             }
             //frame update
             const dir = state.dir;
