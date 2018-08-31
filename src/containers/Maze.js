@@ -30,7 +30,15 @@ class Maze extends Component {
             />
         );
         return (
-            <div>{walls}</div>
+            <div>
+                {walls}
+                <div 
+                    className={"exit"}
+                    style={
+                        mazeData[this.props.stage_id]["exit"]
+                    }
+                />
+            </div>
         );
     }
 }

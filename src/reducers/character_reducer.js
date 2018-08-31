@@ -12,6 +12,7 @@ export default function(state = null, action) {
                 top: mazeData[action.maze_id].character_pos.top + 200,
                 left: mazeData[action.maze_id].character_pos.left,
                 speed: 100,
+                out: false,
             }
             return new_state;
         case "RESET":
@@ -21,10 +22,11 @@ export default function(state = null, action) {
                 top: mazeData[action.maze_id].character_pos.top,
                 left: mazeData[action.maze_id].character_pos.left,
                 speed: 100,
+                out: false,
             }
             return new_state; 
         case "UPDATEALL":
-            if(!action.running){
+            if(!action.running || state.out){
                 return state;
             }
             new_state = Object.assign({}, state);
@@ -59,26 +61,33 @@ export default function(state = null, action) {
                     var pos = moveSingleAxis(-speed * dt, 0, state.left, state.top, dir, maze);
                     new_state.left = pos.x
                 }
-                if(dir === 'r'){
+                else if(dir === 'r'){
                     //new_state.left = state.left + speed * action.dt
                     pos = moveSingleAxis(speed * dt, 0, state.left, state.top, dir, maze);
                     new_state.left = pos.x
+
                 }
-                if(dir === 'u'){
+                else if(dir === 'u'){
                     //new_state.top = state.top - speed * action.dt
 
                     pos = moveSingleAxis(0, -speed * dt, state.left, state.top, dir, maze);
                     new_state.top = pos.y
                 }
-                if(dir === 'd'){
+                else if(dir === 'd'){
                     //new_state.top = state.top + speed * action.dt
 
                     pos = moveSingleAxis(0, speed * dt, state.left, state.top, dir, maze);
                     new_state.top = pos.y
                 }
+                else{
+                    pos = moveSingleAxis(0, 0, state.left, state.top, dir, maze);
+                }
+                if(pos.out){
+                    new_state.out = true;
+                    new_state.still = "still";
+                }
 
-                // manage maze ob here
-
+                
                 return new_state;
             }
             return new_state;
@@ -87,7 +96,7 @@ export default function(state = null, action) {
             return state;
     }
 }
-
+// Manage collision and operation here
 function moveSingleAxis(dx, dy, x, y, dir, maze){
     x += dx
     y += dy
@@ -95,10 +104,8 @@ function moveSingleAxis(dx, dy, x, y, dir, maze){
     for (var i = 0; i < maze["brick"].length; i++){
 
         const item = maze["brick"][i]
-        console.log(rect)
-        // console.log(item)
+
         if (collideRect(item, rect)){
-            console.log('coll')
             if (dx > 0){
                 x = item.left - rect.width
             }
@@ -114,5 +121,11 @@ function moveSingleAxis(dx, dy, x, y, dir, maze){
         }
 
     }
-    return {x: x, y: y, dir: dir}
+    const exit = {top: maze["exit"].top, left: maze["exit"].left, width: 15, height: 15}
+    var out = false;
+    if (collideRect(rect, exit)){
+        console.log('exit')
+        out = true;
+    }
+    return {x: x, y: y, dir: dir, out: out}
 }

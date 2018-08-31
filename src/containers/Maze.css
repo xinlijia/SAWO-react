@@ -2,3 +2,11 @@
     background-image: url("../resource/image/wall.png");
     position: absolute;
 }
+
+.exit{
+    /* background-image: url("../resource/image/floor.png"); */
+    background-color: lightgreen;
+    width: 15px;
+    height: 15px;
+    position: absolute;
+}
