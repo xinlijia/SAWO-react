@@ -70,6 +70,20 @@ class Stage extends Component {
                 updateMove={this.props.updateMove}
             />
         );
+        // let tools = this.props.tool_list.map((item. index) =>
+        //     <Move
+        //         key={item.id}
+        //         id={item.id}
+        //         type={item.type}
+        //         top={item.top}
+        //         left={item.left}
+        //         timeline_dic={this.props.timeline}
+        //         move_list={this.props.move_list}
+        //         dragging={item.dragging}
+        //         updateMove={this.props.updateMove}
+        //     />
+        // );        
+
 
         return (
             <div className="stage">
@@ -108,6 +122,7 @@ function mapStateToProps(state) {
     return {
         character: state.characterReducer,
         move_list: state.moveList,
+        // tool_list: state.toolList,
         timeline: state.timeline,
         timeline_pointer: state.timelinePointer,
         stage_id: state.stageId,
