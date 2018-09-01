@@ -49,6 +49,9 @@ export default function(state = null, action) {
                     new_state.dir = 'r';
                     new_state.still = 'moving';
                 }
+                else if(move.type === 'move_speedup'){
+                    new_state.speed = state.speed * 2;
+                }
             }
             //frame update
             const dir = state.dir;
