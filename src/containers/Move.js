@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Move.css';
-import { collideRect } from '../util/functions.js'
 
 class Move extends Component {
     constructor(props) {
@@ -17,10 +16,6 @@ class Move extends Component {
             document.removeEventListener('mousemove', this.onMouseMove);
             document.removeEventListener('mouseup', this.onMouseUp);
         }
-    }
-
-    validTarget(rect){
-        return collideRect(rect, this.state.rect);
     }
 
     onMouseUp(e) {
