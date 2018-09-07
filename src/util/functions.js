@@ -16,7 +16,7 @@ export function collideList(list, rect0) {
 }
   
 export function collideCell(rect, maze_rect, cell_width, cell_height) {
-    if (maze_rect.width % cell_width != 0 || maze_rect.height % cell_height != 0){
+    if (maze_rect.width % cell_width !== 0 || maze_rect.height % cell_height !== 0){
         return -1;
     }
     let m = maze_rect.width / cell_width;
