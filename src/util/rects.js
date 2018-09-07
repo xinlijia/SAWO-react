@@ -11,3 +11,10 @@ export const timeline_rect = {
     width: 250,
     height: 10,
 };
+
+export const tool_list_rect = {
+    top: 40,
+    left: 25,
+    width: 300,
+    height: 30,
+};

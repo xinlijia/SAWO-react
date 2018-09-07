@@ -1,0 +1,12 @@
+.move_icon{
+    background-size: contain;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    /* border-radius: 50%; */
+}
+#u-turn{
+    background-image: url("../resource/image/tool-u-turn.png");
+
+}
+

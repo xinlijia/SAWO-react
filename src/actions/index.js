@@ -41,10 +41,22 @@ function updateMove(id, top, left, act, timeline_dic, move_list) {
     };
 }
 
+function updateTool(id, top, left, act, tool_list) {
+    return {
+        type: "UPDATETOOL",
+        id: id,
+        top: top,
+        left: left,
+        act: act,
+        tool_list: tool_list,
+    };
+}
+
 export default {
     changeStage,
     updateAll,
     resetStage,
     toggleRunning,
     updateMove,
+    updateTool,
 };
