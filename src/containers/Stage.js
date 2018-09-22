@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Move from './Move';
+import Tool from './Tool';
 import Character from './Character';
 import Maze from './Maze';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "../actions/index";
+import {move_list_rect, timeline_rect, tool_list_rect} from '../util/rects'
 
 import './Stage.css';
 // import { collideRect } from '../util/functions.js'
@@ -14,20 +16,20 @@ class Stage extends Component {
     constructor(props) {
         super(props);
         this.props.resetStage(this.props.stage_id);        
-        this.state = {
-            move_rect:{
-                top: 20,
-                left: 25,
-                width: 300,
-                height: 30,
-            },
-            timeline_rect:{
-                top: 100,
-                left: 50,
-                width: 250,
-                height: 10,
-            },
-        };
+        // this.state = {
+        //     move_rect:{
+        //         top: 20,
+        //         left: 25,
+        //         width: 300,
+        //         height: 30,
+        //     },
+        //     timeline_rect:{
+        //         top: 100,
+        //         left: 50,
+        //         width: 250,
+        //         height: 10,
+        //     },
+        // };
 
     }
     // manage frame
@@ -70,34 +72,35 @@ class Stage extends Component {
                 updateMove={this.props.updateMove}
             />
         );
-        // let tools = this.props.tool_list.map((item. index) =>
-        //     <Move
-        //         key={item.id}
-        //         id={item.id}
-        //         type={item.type}
-        //         top={item.top}
-        //         left={item.left}
-        //         timeline_dic={this.props.timeline}
-        //         move_list={this.props.move_list}
-        //         dragging={item.dragging}
-        //         updateMove={this.props.updateMove}
-        //     />
-        // );        
+        let tools = this.props.tool_list.map((item, index) =>
+            <Tool
+                key={item.id}
+                id={item.id}
+                type={item.type}
+                top={item.top}
+                left={item.left}
+                dragging={item.dragging}
+                updateTool={this.props.updateTool}
+            />
+        );        
 
 
         return (
             <div className="stage">
-                <div className="move_bar" 
-                    style={this.state.move_rect}
+                <div className="move_list" 
+                    style={move_list_rect}
+                    />
+                <div className="tool_list" 
+                    style={tool_list_rect}
                     />
                 <div className="timeline" 
-                    style={this.state.timeline_rect}
+                    style={timeline_rect}
                     />
                 <div className="timeline_pt"
-                    style={{top: 92, left: this.props.timeline_pointer - 8}}
+                    style={{top: 112, left: this.props.timeline_pointer - 8}}
                 />
                 {moves}
-
+                {tools}
                 <div className="maze">                    
                     <Maze />
                     <Character
@@ -122,7 +125,7 @@ function mapStateToProps(state) {
     return {
         character: state.characterReducer,
         move_list: state.moveList,
-        // tool_list: state.toolList,
+        tool_list: state.toolList,
         timeline: state.timeline,
         timeline_pointer: state.timelinePointer,
         stage_id: state.stageId,
@@ -135,6 +138,8 @@ function mapDispatchToProps(dispatch) {
     // to all of our reducers
     return bindActionCreators({ 
             updateMove: actions.updateMove,
+            updateTool: actions.updateTool,
+
             updateAll: actions.updateAll,
             toggleRunning: actions.toggleRunning,
             resetStage: actions.resetStage,

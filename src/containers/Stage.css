@@ -18,19 +18,22 @@
 }
 
 .timeline_pt{
-    position: relative;
+    position: absolute;
     width: 16px;
     height: 16px;
     background-image: url("../resource/image/timeline_pointer.png");
 
 }
 
-.move_bar{
+.move_list{
     position: absolute;
 
     background-image: url("../resource/image/move_bar.png");
 }
-
+.tool_list{
+    position: absolute;
+    background-image: url("../resource/image/move_bar.png");
+}
 
 .timeline{
     position: absolute;

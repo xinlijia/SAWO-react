@@ -1,6 +1,6 @@
 import mazeData from '../resource/maze/maze.json';
-import { tool_list_rect } from '../util/rects'
-import { collideCell } from '../util/functions';
+import { tool_list_rect, maze_rect } from '../util/rects'
+import { collideCell, collideRect } from '../util/functions';
 
 
 export default function(state = [], action) {
@@ -19,13 +19,13 @@ export default function(state = [], action) {
             }
             return tool_list;
         case "RESET":
-            let tool_list = [];
-            let tool = mazeData[action.maze_id].tool
-            for(var i=0; i < tool.length; i++){
-                var type = tool[i];
+            tool_list = [];
+            tool = mazeData[action.maze_id].tool
+            for(i = 0; i < tool.length; i++){
+                type = tool[i];
                 tool_list.push(
                     {'id': i, 'type': type, 'container': 'tool', 'dragging': false,
-                    'top': 40, 'left': i * 40 + 30, 'oritop': 40, 'orileft': i * 40 + 30,
+                    'top': 80, 'left': i * 40 + 30, 'oritop': 40, 'orileft': i * 40 + 30,
                     'offtop': 0, 'offleft': 0, 'incell': false,
                     }
                 )
@@ -64,9 +64,9 @@ export default function(state = [], action) {
                 const cell_width = 10;
                 const cell_height = 10;
                 const cell_index = collideCell(rect, maze_rect, cell_width, cell_height); 
-                if(cell_index != -1){
+                if(cell_index !== -1){
                     const m = maze_rect.width / cell_width;
-                    const n = maze_rect.height / cell_height;
+                    // const n = maze_rect.height / cell_height;
                     const x = cell_index / m;
                     const y = cell_index % m;
                     tool.left = maze_rect.left + cell_width * x;
